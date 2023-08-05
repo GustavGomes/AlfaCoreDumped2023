@@ -17,6 +17,10 @@ namespace AlfaCoreDumped.Domain.Entities
         public string Cpf { get; set; }
 
         [Required]
+        [RegularExpression("^[MFO]$", ErrorMessage = "Gender must be 'M', 'F', or 'O'.")]
+        public char Gender { get; set; }
+
+        [Required]
         public string RoleName { get; set; }
 
         [Required]
@@ -28,7 +32,10 @@ namespace AlfaCoreDumped.Domain.Entities
         public ICollection<string> Permissions { get; set; }
             = new List<string>();
 
-        public ICollection<Solicitation> Solicitations { get; set; }
-            = new List<Solicitation>();
+        public ICollection<VacationSolicitation> VacationSolicitations { get; set; }
+            = new List<VacationSolicitation>();
+
+        public ICollection<RescissionSolicitation> RescissionSolicitations { get; set; }
+            = new List<RescissionSolicitation>();
     }
 }
