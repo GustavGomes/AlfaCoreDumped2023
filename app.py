@@ -1,11 +1,9 @@
 from flask import Flask, jsonify, request
-from service import UserService
+from service import UserService, CandidateService
 from flask_cors import CORS
-
 
 app = Flask(__name__)
 CORS(app)
-
 
 @app.route('/api', methods=['GET'])
 def hw():
@@ -27,3 +25,7 @@ def UpdateUser():
 @app.route('/api/deleteUser', methods=['POST'])
 def DeleteUser():
     return UserService.DeleteUser(request)
+
+@app.route('/api/insertCandidate', methods=['POST'])
+def InsertCandidate():
+    return CandidateService.InsertCandidate(request)
