@@ -6,8 +6,8 @@ def OpenConnection():
         # Configuração da conexão com o banco de dados
         connection = mysql.connector.connect(
             host='localhost',      # Endereço do servidor do banco de dados
-            user='root',    # Nome de usuário do banco de dados
-            password='Eusoudemais1!',  # Senha do usuário do banco de dados
+            user='coredumped',    # Nome de usuário do banco de dados
+            password='coredumped',  # Senha do usuário do banco de dados
             database='mydb', # Nome do banco de dados a ser utilizado
         )
 

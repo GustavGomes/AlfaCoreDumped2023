@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from service import UserService, AreasService, EquipmentsService, CandidateService
+from service import UserService, AreasService, EquipmentsService, CandidateService, ReportService
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -31,6 +31,7 @@ def DeleteUser():
 
 @app.route('/api/getAreaById', methods=['GET'])
 def GetAreaById():
+    print("GetAreaById request received")
     return AreasService.GetAreaById(request)
 
 @app.route('/api/getAreaByCode', methods=['GET'])
@@ -67,3 +68,17 @@ def GetCandidates():
 @app.route('/api/getCandidateById', methods=['GET'])
 def GetCandidateById():
     return CandidateService.GetCandidateById(request)
+
+
+#-----------Reports----------------
+@app.route('/api/getReportById', methods=['GET'])
+def GetReportById():
+    return ReportService.GetReportById(request)
+
+@app.route('/api/getReportByLocation', methods=['GET'])
+def GetReportByLocation():
+    return ReportService.GetReportByLocation(request)
+
+@app.route('/api/insertReport', methods=['POST'])
+def InsertReport():
+    return ReportService.InsertReport(request)
