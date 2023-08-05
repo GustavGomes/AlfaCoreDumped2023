@@ -11,3 +11,10 @@ def InsertCandidate(request) -> Response:
                  RgNumber=request.json['rgNumber'], RgEmissorCity=request.json['rgEmissorCity'], RgReleaseDate=request.json['rgReleaseDate'], Cpf=request.json['cpf'], Pispasep=request.json['pispasep'], Function=request.json['function'], Lodged=request.json['lodged'],
                  Pcd=request.json['pcd'], RgFile=request.json['rgFile'], CpfFile=request.json['cpfFile'], ResumeFile=request.json['resumeFile'], CnhFile=request.json['cnhFile'], ArmyFile=request.json['armyFile'], HasFriendFamiliar=request.json['hasFriendFamiliar'])
     return candidateDao.InsertCandidate(c)
+
+def GetCandidates() -> Response:
+    return candidateDao.GetCandidates()
+
+def GetCandidateById(request) -> Response:
+    id = request.args.get('id')
+    return candidateDao.GetCandidateById(id)

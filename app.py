@@ -29,3 +29,11 @@ def DeleteUser():
 @app.route('/api/insertCandidate', methods=['POST'])
 def InsertCandidate():
     return CandidateService.InsertCandidate(request)
+
+@app.route('/api/getCandidates', methods=['GET'])
+def GetCandidates():
+    return CandidateService.GetCandidates()
+
+@app.route('/api/getCandidateById', methods=['GET'])
+def GetCandidateById():
+    return CandidateService.GetCandidateById(request)

@@ -1,16 +1,30 @@
 import mysql.connector
 from dao import dao
 from model import candidatesModel as candidate
-from flask import Response
+from flask import Response, jsonify
 
-def GetAllCandidates():
+def GetCandidates() -> Response:
     connection = dao.OpenConnection()
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM candidates")
-    for row in cursor:
-        print("Row: ", row)
-
+    query = '''
+        SELECT * FROM candidate
+        '''
+    cursor.execute(query)
+    result = cursor.fetchall()
     connection.close()
+    return result
+
+def GetCandidateById(id: int) -> Response:
+    connection = dao.OpenConnection()
+    cursor = connection.cursor()
+    query = '''
+        SELECT * FROM candidate WHERE id = %s
+        '''
+    data = (id,)
+    cursor.execute(query, data)
+    result = cursor.fetchone()
+    connection.close()
+    return jsonify(result)
 
 def InsertCandidate(c: candidate) -> Response:
     connection = dao.OpenConnection()
