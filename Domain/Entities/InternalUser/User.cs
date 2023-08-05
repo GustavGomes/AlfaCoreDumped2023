@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using AlfaCoreDumped.Domain.Entities.InternalUser.UserSolicitation;
 using AlfaCoreDumped.Domain.ValueObject;
 
@@ -34,9 +37,17 @@ namespace AlfaCoreDumped.Domain.Entities.InternalUser
         public ICollection<Permission> Permissions { get; set; }
             = new List<Permission>();
 
+        public ICollection<VacationSolicitationId> VacationSolicitationsIds { get; set; }
+            = new List<VacationSolicitationId>();
+
+        [ForeignKey("VacationSolicitationsIds")]
         public ICollection<VacationSolicitation> VacationSolicitations { get; set; }
             = new List<VacationSolicitation>();
 
+        public ICollection<RescissionSolicitationId> RescissionSolicitationsIds { get; set; }
+            = new List<RescissionSolicitationId>();
+
+        [ForeignKey("RescissionSolicitationsIds")]
         public ICollection<RescissionSolicitation> RescissionSolicitations { get; set; }
             = new List<RescissionSolicitation>();
     }

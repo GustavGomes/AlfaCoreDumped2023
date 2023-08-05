@@ -22,6 +22,17 @@ namespace AlfaCoreDumped.Infrastructure.DbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.VacationSolicitations)
+                .WithOne()
+                .HasForeignKey(v => v.Id)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.RescissionSolicitations)
+                .WithOne()
+                .HasForeignKey(r => r.Id)
+                .OnDelete(DeleteBehavior.Restrict);
             base.OnModelCreating(modelBuilder);
         }
     }
