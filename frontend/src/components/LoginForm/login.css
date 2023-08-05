@@ -1,0 +1,52 @@
+/* login.css */
+
+.Auth-form-container {
+    max-width: 1000px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    margin: 35px auto 0 auto;
+    display: flex;
+    align-items: center;
+    
+  }
+
+  .btn {
+    margin-top: 20px;
+  }
+
+  .form-control {
+    margin-left: 0 !important;
+  }
+  
+  .login--img {
+    padding: 30px;
+    flex: 1;
+    max-width: 450px; /* Defina o tamanho máximo da imagem conforme necessário */
+  }
+  
+  .Auth-form {
+    flex: 1;
+    padding: 20px;
+  }
+
+  .btn {
+    background-color: #003a65 !important;
+  }
+  
+  /* Media query para telas menores que as de tablet */
+  @media screen and (max-width: 768px) {
+    .Auth-form-container {
+      flex-direction: column;
+      justify-content: center;
+    }
+  
+    .login--img {
+      display: none; /* Esconde a imagem */
+    }
+  
+    .Auth-form {
+      max-width: 400px; /* Defina o tamanho máximo do formulário conforme necessário */
+      margin: 0 auto; /* Centraliza o formulário */
+    }
+  }
+  
