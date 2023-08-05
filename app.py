@@ -1,11 +1,9 @@
 from flask import Flask, jsonify, request
-from service import UserService, AreasService, EquipmentsService
+from service import UserService, AreasService, EquipmentsService, CandidateService
 from flask_cors import CORS
-
 
 app = Flask(__name__)
 CORS(app)
-
 
 @app.route('/api', methods=['GET'])
 def hw():
@@ -56,3 +54,16 @@ def GetEquipmentByCode():
 def InsertEquipment():
     return EquipmentsService.InsertEquipment(request)
 
+#-----------Candidate----------------
+
+@app.route('/api/insertCandidate', methods=['POST'])
+def InsertCandidate():
+    return CandidateService.InsertCandidate(request)
+
+@app.route('/api/getCandidates', methods=['GET'])
+def GetCandidates():
+    return CandidateService.GetCandidates()
+
+@app.route('/api/getCandidateById', methods=['GET'])
+def GetCandidateById():
+    return CandidateService.GetCandidateById(request)
