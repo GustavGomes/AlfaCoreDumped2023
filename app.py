@@ -89,7 +89,6 @@ def GetCandidateById():
 def GetReportById():
     return ReportService.GetReportById(request)
 
-# Retorna todos os reports de uma determinada localização, para gerar o mapa de calor
 @app.route('/api/getReportByLocation', methods=['GET'])
 def GetReportByLocation():
     return ReportService.GetReportByLocation(request)

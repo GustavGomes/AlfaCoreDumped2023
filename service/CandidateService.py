@@ -13,8 +13,10 @@ def InsertCandidate(request) -> Response:
     return candidateDao.InsertCandidate(c)
 
 def GetCandidates() -> Response:
-    return candidateDao.GetCandidates()
+    candidates = candidateDao.GetCandidates()
+    candidates_list = [candidate._dict_() for candidate in candidates]
+    return jsonify(candidates_list)
 
 def GetCandidateById(request) -> Response:
     id = request.args.get('id')
-    return candidateDao.GetCandidateById(id)
+    return jsonify(candidateDao.GetCandidateById(id)._dict_())

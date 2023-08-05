@@ -82,7 +82,7 @@ class Candidate:
             'RgEmissorCity': self.RgEmissorCity,
             'RgReleaseDate': self.RgReleaseDate,
             'Cpf': self.Cpf,
-            'PisPasep': self.PisPasep,
+            'Pispasep': self.Pispasep,
             'Function': self.Function,
             'Lodged': self.Lodged,
             'Pcd': self.Pcd,
