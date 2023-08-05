@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from service import UserService, AreasService, EquipmentsService, CandidateService
+from service import UserService, AreasService, EquipmentsService, CandidateService, VacationSolicitationService, RescissionSolicitationService
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -67,3 +67,31 @@ def GetCandidates():
 @app.route('/api/getCandidateById', methods=['GET'])
 def GetCandidateById():
     return CandidateService.GetCandidateById(request)
+
+#-----------VacationSolicitation----------------
+
+@app.route('/api/getVacationSolicitations', methods=['GET'])
+def GetVacationSolicitations():
+    return VacationSolicitationService.GetVacationSolicitations()
+
+@app.route('/api/getVacationSolicitationById', methods=['GET'])
+def GetVacationSolicitationById():
+    return VacationSolicitationService.GetVacationSolicitationById(request)
+
+@app.route('/api/insertVacationSolicitation', methods=['POST'])
+def InsertVacationSolicitation():
+    return VacationSolicitationService.InsertVacationSolicitation(request)
+
+#-----------RescissionSolicitation----------------
+
+@app.route('/api/getRescissionSolicitations', methods=['GET'])
+def GetRescissionSolicitations():
+    return RescissionSolicitationService.GetRescissionSolicitations()
+
+@app.route('/api/getRescissionSolicitationById', methods=['GET'])
+def GetRescissionSolicitationById():
+    return RescissionSolicitationService.GetRescissionSolicitationById(request)
+
+@app.route('/api/insertRescissionSolicitation', methods=['POST'])
+def InsertRescissionSolicitation():
+    return RescissionSolicitationService.InsertRescissionSolicitation(request)
