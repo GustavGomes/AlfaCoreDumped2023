@@ -57,114 +57,28 @@ const PersonForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        test = {
-            "id": 123,
-            "candidateName": "John Doe",
-            "motherName": "Jane Doe",
-            "fatherName": "John Doe Sr.",
-            "gender": "Male",
-            "civiState": "Single",
-            "educationLevel": "Bachelor's Degree",
-            "ethnicity": "Caucasian",
-            "birthDate": "1990-01-01",
-            "nacionality": "American",
-            "birthCountry": "United States",
-            "birthState": "California",
-            "birthCity": "Los Angeles",
-            "shoeSize": "10",
-            "pantsSize": "32",
-            "shirtSize": "Medium",
-            "telephoneNumber": "123-456-7890",
-            "secondTelephoneNumber": "987-654-3210",
-            "email": "john.doe@example.com",
-            "cep": "12345-678",
-            "country": "United States",
-            "state": "California",
-            "city": "San Francisco",
-            "neighborhood": "Downtown",
-            "residencyType": "Apartment",
-            "street": "123 Main Street",
-            "residencyNumber": 4,
-            "complement": "Apartment complex",
-            "rgNumber": "ABC12345",
-            "rgEmissorCity": "Los Angeles",
-            "rgReleaseDate": "2010-05-15",
-            "cpf": "12345678901",
-            "pispasep": "12345678900",
-            "function": "Software Engineer",
-            "lodged": true,
-            "pcd": false,
-            "rgFile": "base64_encoded_rg_file",
-            "cpfFile": "base64_encoded_cpf_file",
-            "resumeFile": "base64_encoded_resume_file",
-            "cnhFile": "base64_encoded_cnh_file",
-            "armyFile": "base64_encoded_army_file",
-            "hasFriendFamiliar": true
-        }
-        
-        responseJson ={
-            "id": 123,
-            "candidateName": person.name,
-            "motherName": person.mother_name,
-            "fatherName": person.father_Name,
-            "gender": person.genre,
-            "civiState": person.civil_state,
-            "educationLevel": person.education_level,
-            "ethnicity": person.ethnicity,
-            "birthDate": person.birth_Date,
-            "nacionality": person.nacionality,
-            "birthCountry": person.birth_country,
-            "birthState": person.birth_state,
-            "birthCity": person.birth_city,
-            "shoeSize": person.shoe_size,
-            "pantsSize": person.pants_size,
-            "shirtSize": person.shirt_size,
-            "telephoneNumber": person.telephone_number,
-            "secondTelephoneNumber": person.second_telephone_number,
-            "email": person.email,
-            "cep": person.cep,
-            "country": person.country,
-            "state": person.state,
-            "city": person.city,
-            "neighborhood": person.neighborhood,
-            "residencyType": person.residency_type,
-            "street": person.street,
-            "residencyNumber": person.residency_number,
-            "complement": person.complement,
-            "rgNumber": person.rg_number,
-            "rgEmissorCity": person.rg_emissor_city,
-            "rgReleaseDate": person.rg_release_date,
-            "cpf": person.cpf,
-            "pispasep": person.pispasep,
-            "function": person.function,
-            "lodged": person.lodged,
-            "pcd": person.pcd,
-            "rgFile": person.rgFile,
-            "cpfFile": person.cpfFile,
-            "resumeFile": person.resumeFile,
-            "cnhFile": person.cnhFile,
-            "armyFile": person.armyFile,
-            "hasFriendFamiliar": person.hasFriendFamiliar
-        }
+        if (consentChecked) {
+            // Realize as ações necessárias com o consentimento concedido
+            console.log('Consentimento concedido!');
 
-        fetch('https://localhost:5066/api/candidate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(responseJson),
-        
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                console.log("Dados enviados com sucesso!")
+            // Realizar a requisição ao servidor
+            fetch("http://192.168.5.184:5066/api/insertCandidate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(person),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Resposta do servidor:", data);
             })
             .catch((error) => {
-                console.error('Error:', error);
-                console.log("Erro ao enviar dados!")
+                console.error("Erro ao enviar os dados:", error);
             });
-        // Aqui você pode enviar os dados da pessoa para o servidor ou fazer outras ações necessárias com os dados
+        } else {
+            console.error('O consentimento é obrigatório!');
+        }
     };
 
     return (
