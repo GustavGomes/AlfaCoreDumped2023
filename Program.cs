@@ -1,5 +1,6 @@
 
 using AlfaCoreDumped.Infrastructure.DbContext;
+using AlfaCoreDumped.Infrastructure.DbRepository;
 using Microsoft.EntityFrameworkCore;
 
 namespace AlfaCoreDumped
@@ -27,7 +28,7 @@ namespace AlfaCoreDumped
             builder.Services.AddDbContext<AlfaDbContext>(dbContextOptions =>
                 dbContextOptions.UseMySql(connectionStringDb, new MySqlServerVersion(new Version(8, 0, 29))));
 
-
+            builder.Services.AddScoped<IAlfaRepository, AlfaRepository>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

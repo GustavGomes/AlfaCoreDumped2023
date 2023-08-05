@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AlfaCoreDumped.Domain.Entities.ExternalCandidate
 {
@@ -9,6 +10,10 @@ namespace AlfaCoreDumped.Domain.Entities.ExternalCandidate
 
         [Required]
         public Guid CandidateId { get; set; }
+
+        [ForeignKey("CandidateId")]
+        [Required]
+        public Candidate Candidate { get; set;}
 
         [Required]
         public string Cpf { get; set; }

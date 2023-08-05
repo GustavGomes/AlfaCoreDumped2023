@@ -16,7 +16,6 @@ namespace AlfaCoreDumped.Domain.Entities.CompanyResources
         [Required]
         public bool LiberationStatus { get; set; }
 
-        [Required]
         public byte[] PdfFile { get; set; }
 
     }

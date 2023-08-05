@@ -21,8 +21,6 @@
 
   <ItemGroup>
     <Folder Include="Domain\Business\" />
-    <Folder Include="Infrastructure\Migrations\" />
-    <Folder Include="Infrastructure\DbRepository\" />
   </ItemGroup>
 
 </Project>

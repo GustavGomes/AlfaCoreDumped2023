@@ -34,6 +34,17 @@ namespace AlfaCoreDumped.Infrastructure.DbContext
                 .HasForeignKey(r => r.Id)
                 .OnDelete(DeleteBehavior.Restrict);
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Area>().HasData(
+                new Area()
+                {
+                    Id = Guid.Parse("d28888e9-2ba9-473a-a40f-e38cb54f9b35"),
+                    Code = "Area1",
+                    Description = "Descrição da area 1",
+                    LiberationStatus = false,
+                    PdfFile = new byte[]{1}
+                }
+            );
         }
     }
 }
