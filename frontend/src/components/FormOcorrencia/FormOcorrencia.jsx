@@ -18,6 +18,11 @@ function FormOcorrencia() {
         setOccurrence({ ...occurrence, [name]: value });
     };
 
+    const handleImageChange = (e) => {
+        const imageFile = e.target.files[0];
+        setOccurrence({ ...occurrence, image: imageFile });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         if (
@@ -102,6 +107,16 @@ function FormOcorrencia() {
                         />
                     </div>
                 </div>
+                <div className="form-control">
+                    <label htmlFor="image">Imagem: </label>
+                    <input
+                        type="file"
+                        name="image"
+                        onChange={handleImageChange}
+                        className="input--form"
+                    />
+                </div>
+
                 <div className="text-center">
                     <button className='btn' type="submit" onClick={handleSubmit}>
                         Enviar Ocorrência
