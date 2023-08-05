@@ -58,12 +58,12 @@ namespace AlfaCoreDumped.Domain.Entities
 
         // Contact
         [Required]
-        public string Telephone { get; set; }
+        public string TelephoneNumber { get; set; }
+
+        public string SecondTelephoneNumber { get; set; }
 
         [Required]
         public string Email { get; set; }
-
-        public string Telephone2 { get; set; }
 
         // Address
         [Required]
@@ -82,32 +82,32 @@ namespace AlfaCoreDumped.Domain.Entities
         public string Neighborhood { get; set; }
 
         [Required]
-        public string LogradouroType { get; set; }
+        public string ResidencyType { get; set; }
     
         [Required]
         public string Street { get; set; }
 
         [Required]
         [Range(1, int.MaxValue)]
-        public int Number { get; set; }	
+        public int ResidencyNumber { get; set; }	
 
         public string Complement { get; set; }
 
         // Identification
         [Required]
-        public string Rg { get; set; }
+        public string RgNumber { get; set; }
 
         [Required]
-        public string EmissorOrg { get; set; }
+        public string RgEmissorOrg { get; set; }
 
         [Required]
-        public string EmissorState { get; set; }
+        public string RgEmissorState { get; set; }
 
         [Required]
-        public string EmissorCity { get; set; }
+        public string RgEmissorCity { get; set; }
 
         [Required]
-        public DateTime EmitionDate { get; set; }
+        public DateTime RgReleaseDate { get; set; }
 
         [Required]
         public string Cpf { get; set; }
@@ -123,7 +123,7 @@ namespace AlfaCoreDumped.Domain.Entities
         public string Lodged { get; set; }
 
         [Required]
-        public string PCD { get; set; }
+        public string Pcd { get; set; }
 
         // Anexos
 
@@ -138,7 +138,7 @@ namespace AlfaCoreDumped.Domain.Entities
 
         public byte[] CnhFile { get; set; }
 
-        public byte[] ReservistaFile { get; set; }
+        public byte[] ArmyFile { get; set; }
 
         public bool HasFriendFamiliarWorking { get; set; }
 
