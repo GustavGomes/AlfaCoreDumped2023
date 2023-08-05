@@ -8,6 +8,11 @@ namespace AlfaCoreDumped.Infrastructure.DbRepository
     {
         private readonly AlfaDbContext _dbContext;
 
+        public AlfaRepository(AlfaDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public bool Save()
         {
             return _dbContext.SaveChanges() >= 0;

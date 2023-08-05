@@ -38,6 +38,8 @@ namespace AlfaCoreDumped.Controllers
                 LiberationStatus = area.LiberationStatus,
                 PdfFile = area.PdfFile
             };
+            _alfaRepository.AddArea(newArea);
+            _alfaRepository.Save();
         }
     }
 }
