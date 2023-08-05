@@ -51,7 +51,7 @@ function FormOcorrencia() {
         <div className="form-container">
             <div className="row">
                 <div className="col-12">
-                    <h1 className="text-center">Envie uma ocorrência</h1>
+                    <h1 className="text-center">Envie um Relato</h1>
                 </div>
             </div>
 
@@ -119,7 +119,7 @@ function FormOcorrencia() {
 
                 <div className="text-center">
                     <button className='btn' type="submit" onClick={handleSubmit}>
-                        Enviar Ocorrência
+                        Enviar Relato
                     </button>
                 </div>
             </form>

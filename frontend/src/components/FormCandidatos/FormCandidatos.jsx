@@ -60,11 +60,25 @@ const PersonForm = () => {
         if (consentChecked) {
             // Realize as ações necessárias com o consentimento concedido
             console.log('Consentimento concedido!');
+
+            // Realizar a requisição ao servidor
+            fetch("http://192.168.5.184:5066/api/insertCandidate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(person),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Resposta do servidor:", data);
+            })
+            .catch((error) => {
+                console.error("Erro ao enviar os dados:", error);
+            });
         } else {
-            // Exiba um erro informando que o consentimento é obrigatório
             console.error('O consentimento é obrigatório!');
         }
-        // Aqui você pode enviar os dados da pessoa para o servidor ou fazer outras ações necessárias com os dados
     };
 
     return (
