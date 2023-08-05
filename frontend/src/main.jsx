@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, useRoutes, Navigate } from 'react-router-dom';
 
@@ -63,10 +64,29 @@ const routes = [
   },
 ];
 
+function AppRoutes() {
+  // Call the isAuthenticated function dynamically in the route element
+  return useRoutes(routes);
+}
+
+// Wrap the rendering logic in a component and use useEffect
+function AppWrapper() {
+  useEffect(() => {
+    // This will run every time the component mounts (i.e., page reloads)
+    isAuthenticated(); // You can do something with the return value if needed
+  }, []);
+
+  return (
+    <React.StrictMode>
+      <RouterProvider router={router}>
+        <AppRoutes />
+      </RouterProvider>
+    </React.StrictMode>
+  );
+}
+
 const router = createBrowserRouter(routes);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <AppWrapper />
 );
