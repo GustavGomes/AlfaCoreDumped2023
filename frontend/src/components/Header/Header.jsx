@@ -20,6 +20,7 @@ export default function Header() {
         localStorage.removeItem("username");
         localStorage.removeItem("roleName");
         // Atualiza o estado de isLoggedIn para indicar que o usuário não está mais logado
+        location.reload()
         setIsLoggedIn(false);
     }
 
