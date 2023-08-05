@@ -15,7 +15,8 @@ def GetAreaById(id: int) -> area:
     if cursor.arraysize == 1:
         try:
             row = cursor.fetchone()
-            return area.Area(row[0], row[1], row[2], row[3], row[4])
+            print(row)
+            return area.Areas(row[0], row[1], row[2], row[3], row[4])
         except:
             pass
     connection.close()

@@ -5,7 +5,7 @@
     margin-right: 30px;
 }
 
-input {
+input, textarea {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -60,4 +60,8 @@ h1 {
     background-color: #006aab !important;
     font-family: 'Poppins', sans-serif;
     color: #fff !important;
+}
+
+body {
+    padding-top: 40px !important;
 }

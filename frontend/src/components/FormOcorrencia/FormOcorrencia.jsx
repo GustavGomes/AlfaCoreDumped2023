@@ -3,10 +3,10 @@ import "./formOcorrencia.css";
 
 function FormOcorrencia() {
     const [occurrence, setOccurrence] = useState({
-        reporterName: "",
-        costCenter: "",
+        reporter_name: "",
+        cost_center: "",
         description: "",
-        operationField: "",
+        operation_field: "",
         location: ""
     });
     const [occurrences, setOccurrences] = useState([]);
@@ -21,10 +21,10 @@ function FormOcorrencia() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (
-            occurrence.reporterName &&
-            occurrence.costCenter &&
+            occurrence.reporter_name &&
+            occurrence.cost_center &&
             occurrence.description &&
-            occurrence.operationField &&
+            occurrence.operation_field &&
             occurrence.location
         ) {
             const newOccurrence = {
@@ -33,82 +33,104 @@ function FormOcorrencia() {
             };
             setOccurrences([...occurrences, newOccurrence]);
             setOccurrence({
-                reporterName: "",
-                costCenter: "",
+                reporter_name: "",
+                cost_center: "",
                 description: "",
-                operationField: "",
+                operation_field: "",
                 location: ""
             });
         }
     };
 
     return (
-        <section className="form-container">
-            <h1 className="text-center">Envie uma ocorrência</h1>
+        <div className="form-container">
+            <div className="row">
+                <div className="col-12">
+                    <h1 className="text-center">Envie uma ocorrência</h1>
+                </div>
+            </div>
+
             <form className="form">
-                <div className="form-control">
-                    <label htmlFor="reporterName">Nome: </label>
-                    <input
-                        type="text"
-                        name="reporterName"
-                        value={occurrence.reporterName}
-                        onChange={handleChange}
-                    />
+                <div className="row">
+                    <div className="col-12">
+                        <div className="form-control">
+                            <label htmlFor="reporter_name">Nome: </label>
+                            <input
+                                type="text"
+                                name="reporter_name"
+                                value={occurrence.reporter_name}
+                                onChange={handleChange}
+                                className="input--form"
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="form-control">
-                    <label htmlFor="costCenter">Centro de Custo: </label>
-                    <input
-                        type="text"
-                        name="costCenter"
-                        value={occurrence.costCenter}
-                        onChange={handleChange}
-                    />
+                <div className="row">
+                    <div className="col-md-6">
+                        <div className="form-control">
+                            <label htmlFor="operation_field">Área de Atuação: </label>
+                            <input
+                                type="text"
+                                name="operation_field"
+                                value={occurrence.operation_field}
+                                onChange={handleChange}
+                                className="input--form"
+                            />
+                        </div>
+                    </div>
+                    <div className="col-md-6">
+                        <div className="form-control">
+                            <label htmlFor="cost_center">Centro de Custo: </label>
+                            <input
+                                type="text"
+                                name="cost_center"
+                                value={occurrence.cost_center}
+                                onChange={handleChange}
+                                className="input--form"
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="form-control">
-                    <label htmlFor="operationField">Área de Atuação: </label>
-                    <input
-                        type="text"
-                        name="operationField"
-                        value={occurrence.operationField}
-                        onChange={handleChange}
-                    />
+                <div className="col-12">
+                    <div className="form-control">
+                        <label htmlFor="description">Descrição : </label>
+                        <textarea
+                            name="description"
+                            value={occurrence.description}
+                            onChange={handleChange}
+                            className="input--form"
+                        />
+                    </div>
                 </div>
-                <div className="form-control">
-                    <label htmlFor="description">Descrição : </label>
-                    <input
-                        type="text"
-                        name="description"
-                        value={occurrence.description}
-                        onChange={handleChange}
-                    />
+                <div className="text-center">
+                    <button className='btn' type="submit" onClick={handleSubmit}>
+                        Enviar Ocorrência
+                    </button>
                 </div>
-                <button className='btn' type="submit" onClick={handleSubmit}>
-                    Enviar Ocorrência
-                </button>
             </form>
 
             <div className="items">
                 {occurrences.map((item) => {
                     const {
                         id,
-                        reporterName,
-                        costCenter,
+                        reporter_name,
+                        cost_center,
                         description,
-                        operationField,
+                        operation_field,
                         location
                     } = item;
                     return (
                         <div className="item" key={id}>
-                            <h4>{reporterName}</h4>
-                            <p>Cost Center: {costCenter}</p>
+                            <h4>{reporter_name}</h4>
+                            <p>Cost Center: {cost_center}</p>
                             <p>Description: {description}</p>
-                            <p>Operation Field: {operationField}</p>
+                            <p>Operation Field: {operation_field}</p>
                             <p>Location: {location}</p>
                         </div>
                     );
                 })}
             </div>
-        </section>
+        </div>
     );
 }
 
