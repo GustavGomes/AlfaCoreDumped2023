@@ -18,7 +18,7 @@ namespace AlfaCoreDumped.Domain.Entities
 
         [Required]
         [Range(0, 5)]
-        public int Rank { get; set; }
+        public int RehiringRank { get; set; }
 
         [Required]
         public string RescissionReason { get; set; }
