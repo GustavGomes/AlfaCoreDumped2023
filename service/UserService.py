@@ -15,7 +15,7 @@ def InsertUser(request) -> Response:
     u = User(Id=request.json['id'], Username=request.json['username'],
              Password=request.json['password'], Cpf=request.json['cpf'],
              Gender=request.json['gender'], RoleName=request.json['roleName'],
-             RoleId=request.json['roleId'], Cbo=request.json['cbo'])
+             RoleId=request.json['roleId'], Cbo=request.json['cbo'],Permission=request.json['permission'])
     return userDao.InsertUser(u)
 
 def UpdateUser(request) -> Response:

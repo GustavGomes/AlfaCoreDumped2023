@@ -35,7 +35,7 @@ def InsertUser(u: user) -> Response:
         VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s);
         '''
     data = (u.Id, u.Username, u.Password, u.Cpf, u.Gender
-            , u.RoleName, u.RoleId, u.Cbo)
+            , u.RoleName, u.RoleId, u.Cbo,u.Permission)
     cursor.execute(query, data)
     connection.commit()
     connection.close()
