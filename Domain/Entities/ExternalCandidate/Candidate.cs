@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AlfaCoreDumped.Domain.Entities
+namespace AlfaCoreDumped.Domain.Entities.ExternalCandidate
 {
     public class Candidate
     {
@@ -83,13 +83,13 @@ namespace AlfaCoreDumped.Domain.Entities
 
         [Required]
         public string ResidencyType { get; set; }
-    
+
         [Required]
         public string Street { get; set; }
 
         [Required]
         [Range(1, int.MaxValue)]
-        public int ResidencyNumber { get; set; }	
+        public int ResidencyNumber { get; set; }
 
         public string Complement { get; set; }
 
@@ -143,7 +143,7 @@ namespace AlfaCoreDumped.Domain.Entities
         public bool HasFriendFamiliarWorking { get; set; }
 
         public ICollection<Relative> Relatives { get; set; }
-            = new List<Relative>(); 
+            = new List<Relative>();
 
     }
 }

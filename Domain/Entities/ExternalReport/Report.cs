@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AlfaCoreDumped.Domain.Entities.ExternalCandidate;
+using FileObject = AlfaCoreDumped.Domain.ValueObject.FileObject;
 
-namespace AlfaCoreDumped.Domain.Entities
+namespace AlfaCoreDumped.Domain.Entities.ExternalReport
 {
     public class Report
     {
@@ -22,6 +24,9 @@ namespace AlfaCoreDumped.Domain.Entities
         [Required]
         public DateTime Created { get; set; }
 
-        public ICollection<byte[]> Pictures { get; set; }
+        public string Location { get; set; }
+
+        public ICollection<FileObject> Pictures { get; set; }
+            = new List<FileObject>();
     }
 }

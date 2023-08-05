@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AlfaCoreDumped.Domain.Entities
+namespace AlfaCoreDumped.Domain.Entities.InternalUser.UserSolicitation
 {
     public class VacationSolicitation
     {
@@ -8,9 +9,15 @@ namespace AlfaCoreDumped.Domain.Entities
         public Guid Id { get; set; }
 
         [Required]
-        public User CreatorUser { get; set; }
+        [ForeignKey("CreatorUser")]
+        public Guid CreatorUserId { get; set; }
 
         [Required]
+        [ForeignKey("TargetUser")]
+        public Guid TargetUserId { get; set; }
+
+        public User CreatorUser { get; set; }
+
         public User TargetUser { get; set; }
 
         [Required]

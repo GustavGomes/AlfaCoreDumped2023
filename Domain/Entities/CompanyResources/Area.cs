@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AlfaCoreDumped.Domain.Entities
+namespace AlfaCoreDumped.Domain.Entities.CompanyResources
 {
     public class Area
     {

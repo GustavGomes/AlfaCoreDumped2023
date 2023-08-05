@@ -1,14 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AlfaCoreDumped.Domain.Entities
+namespace AlfaCoreDumped.Domain.Entities.CompanyResources
 {
-    public class AreaEquipament
+    public class Equipment
     {
         [Key]
         public Guid Id { get; set; }
-
-        [Required]
-        public string AreaOrEquipament { get; set; }
 
         [Required]
         public string Code { get; set; }

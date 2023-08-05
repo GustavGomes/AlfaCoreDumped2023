@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AlfaCoreDumped.Domain.Entities
+namespace AlfaCoreDumped.Domain.Entities.InternalUser.UserSolicitation
 {
     public class RescissionSolicitation
     {
@@ -8,9 +9,15 @@ namespace AlfaCoreDumped.Domain.Entities
         public Guid Id { get; set; }
 
         [Required]
-        public User CreatorUser { get; set; }
+        [ForeignKey("CreatorUser")] // Foreign key to reference the User entity
+        public Guid CreatorUserId { get; set; }
 
         [Required]
+        [ForeignKey("TargetUser")] // Foreign key to reference the User entity
+        public Guid TargetUserId { get; set; }
+
+        public User CreatorUser { get; set; }
+
         public User TargetUser { get; set; }
 
         [Required]
@@ -18,7 +25,7 @@ namespace AlfaCoreDumped.Domain.Entities
 
         [Required]
         [Range(0, 5)]
-        public int RehiringRank { get; set; }
+        public int Rank { get; set; }
 
         [Required]
         public string RescissionReason { get; set; }

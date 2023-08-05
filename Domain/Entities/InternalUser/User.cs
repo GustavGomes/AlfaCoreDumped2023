@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using AlfaCoreDumped.Domain.Entities.InternalUser.UserSolicitation;
+using AlfaCoreDumped.Domain.ValueObject;
 
-namespace AlfaCoreDumped.Domain.Entities
+namespace AlfaCoreDumped.Domain.Entities.InternalUser
 {
     public class User
     {
@@ -29,8 +31,8 @@ namespace AlfaCoreDumped.Domain.Entities
         [Required]
         public string Cbo { get; set; }
 
-        public ICollection<string> Permissions { get; set; }
-            = new List<string>();
+        public ICollection<Permission> Permissions { get; set; }
+            = new List<Permission>();
 
         public ICollection<VacationSolicitation> VacationSolicitations { get; set; }
             = new List<VacationSolicitation>();
