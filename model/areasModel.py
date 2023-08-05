@@ -1,5 +1,5 @@
 class Areas:
-    def __init__(self, Id='', Code='', Description='', LiberationStatus='', PdfFile=None):
+    def __init__(self, Id='', Code='', Description='', LiberationStatus='', PdfFile=''):
         self.Id = Id
         self.Code = Code
         self.Description = Description
@@ -14,3 +14,4 @@ class Areas:
             'LiberationStatus':self.LiberationStatus,
             'PdfFile':self.PdfFile,
         }
+    

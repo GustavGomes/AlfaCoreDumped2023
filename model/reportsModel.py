@@ -1,5 +1,5 @@
 class Reports:
-    def __init__(self, Id='', ReporterName='', CostCenter='', Description='', OperationField='', CreatedAt='', Location=''):
+    def __init__(self, Id='', ReporterName='', CostCenter='', Description='', OperationField='', CreatedAt='', Location='', images=[]):
         self.Id = Id
         self.ReporterName = ReporterName
         self.CostCenter = CostCenter
@@ -7,6 +7,7 @@ class Reports:
         self.OperationField = OperationField
         self.CreatedAt = CreatedAt
         self.Location = Location
+        self.images = images
 
     def __dict__(self) -> dict:
         return {
@@ -17,6 +18,7 @@ class Reports:
             'OperationField': self.OperationField,
             'CreatedAt': self.CreatedAt,
             'Location': self.Location,
+            'images': self.images
         }
     
     
