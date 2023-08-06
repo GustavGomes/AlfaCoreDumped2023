@@ -93,7 +93,7 @@ function FormRecisao() {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        <p className="form--text">Qual o motivo da rescisão?:</p>
+                        <p className="form--text">Qual o motivo da rescisão?</p>
                         <label>
                             <select name="reason" value={recission.reason} onChange={handleChange}>
                                 <option value="" disabled>
@@ -126,7 +126,7 @@ function FormRecisao() {
 
                 <div className="row">
                     <div className="col-12">
-                        <p className="form--text">De 1 a 5, quanto você recomendaria esse profissional?:</p>
+                        <p className="form--text">De 1 a 5, quanto você recomendaria esse profissional?</p>
                         <label>
                             <select name="rank" value={recission.rank} onChange={handleChange}>
                                 <option value="0" disabled>0</option>
