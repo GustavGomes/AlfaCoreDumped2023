@@ -8,7 +8,8 @@
 
 import os
 from flask import Flask, jsonify, request, flash, redirect, url_for
-from service import UserService, AreasService, EquipmentsService, CandidateService, ReportService, UtilsService
+import Utils
+from service import UserService, AreasService, EquipmentsService, CandidateService, ReportService,RescissionSolicitationService, VacationSolicitationService
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
@@ -101,22 +102,41 @@ def GetReportByLocation():
 def InsertReport():
     return ReportService.InsertReport(request)
 
+#------------ Solicitação de férias ----------------
+
+@app.route('/api/getVacationSolicitations', methods=['GET'])
+def GetVacationSolicitations():
+    print("GetVacationSolicitations request received")
+    return VacationSolicitationService.GetVacationSolicitations()
+
+@app.route('/api/getVacationSolicitationById', methods=['GET'])
+def GetVacationSolicitationById():
+    print("GetVacationSolicitationById request received")
+    return VacationSolicitationService.GetVacationSolicitationById(request)
+
+@app.route('/api/insertVacationSolicitation', methods=['POST'])
+def InsertVacationSolicitation():
+    print("InsertVacationSolicitation request received")
+    return VacationSolicitationService.InsertVacationSolicitation(request)
+
+#------------ Solicitação de recisão ----------------
+
+@app.route('/api/getRescissionSolicitations', methods=['GET'])
+def GetRescissionSolicitations():
+    print("GetRescissionSolicitations request received")
+    return RescissionSolicitationService.GetRescissionSolicitations()
+
+@app.route('/api/getRescissionSolicitationById', methods=['GET'])
+def GetRescissionSolicitationById():
+    print("GetRescissionSolicitationById request received")
+    return RescissionSolicitationService.GetRescissionSolicitationById(request)
+
+@app.route('/api/insertRescissionSolicitation', methods=['POST'])
+def InsertRescissionSolicitation():
+    print("InsertRescissionSolicitation request received")
+    return RescissionSolicitationService.InsertRescissionSolicitation(request)
 #----------- Files ----------------
 @app.route('/api/uploadFile', methods=['POST'])
 def UploadFile():
     print("UploadFile request received")
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            print("No file part")
-            return redirect(request.url)
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            return redirect(request.url)
-        if file:
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('download_file', name=filename))
-    return 
+    return Utils.UploadFile(request)
