@@ -19,8 +19,16 @@ export default function Header() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     {isLoggedIn ? (
                         <Nav className="ms-auto">
-                            <Nav.Link as={Link} to="/usuariosCadastrados" className="nav--link">USUÁRIOS CADASTRADOS</Nav.Link>
-                            <Nav.Link as={Link} to="/relatorios" className="nav--link">VER OCORRÊNCIAS</Nav.Link>
+                            <Dropdown>
+                                <Dropdown.Toggle as={Nav.Link} className="nav--link">
+                                    VISUALIZAR
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item as={Link} to="/ocorrencias">Ocorrências</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/usuariosCadastrados">Candidatos</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/relatorios">Solicitações</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                             <Dropdown>
                                 <Dropdown.Toggle as={Nav.Link} className="nav--link">
                                     REALIZAR SOLICITAÇÃO

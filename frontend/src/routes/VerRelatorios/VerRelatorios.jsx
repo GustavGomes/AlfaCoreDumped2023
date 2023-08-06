@@ -1,7 +1,7 @@
 import React from "react";
-
+import Relatorios from "../VerRelatorios/VerRelatorios"
 export default function VerRelatorios() {
     return(
-        <h1>relatorios</h1>
+        <Relatorios />
     );
 }

@@ -11,6 +11,8 @@ import CadastroRescisao from './routes/CadastroRescisao/CadastroRescisao';;
 import CadastroAreaEquip from './routes/CadastroAreaEquip/CadastroAreaEquip';
 import VerUsuariosCadastrados from './routes/VerUsuariosCadastrados/VerUsuariosCadastrados';
 import VerRelatorios from './routes/VerRelatorios/VerRelatorios';
+import VerOcorrencias from './routes/CadastroOcorrencia/CadastroOcorrencia';
+
 import App from './App';
 
 //VERIFICAR SE LOGADO --> PERMISSOES
@@ -62,7 +64,11 @@ const routes = [
       {
         path: "/usuariosCadastrados",
         element: isAuthenticated() ? <VerUsuariosCadastrados /> : <Navigate to="/login" />
-      }
+      },
+      {
+        path: "/ocorrencias",
+        element: isAuthenticated() ? <VerOcorrencias /> : <Navigate to="/login" />
+      },
     ]
   },
 ];
