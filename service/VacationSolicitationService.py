@@ -5,7 +5,15 @@ from model.vacationSolicitationModel import VacationSolicitation
 # Insere no banco uma solicitação de férias pela DAO
 def InsertVacationSolicitation(request) -> Response:
     # Cria um objeto do tipo VacationSolicitation com os dados do request
-    v = VacationSolicitation(id=request.json['id'], CreatorId=request.json['creatorId'], TargetId=request.json['targetId'], Status=request.json['status'], VacationStart=request.json['vacationStart'], VacationEnd=request.json['vacationEnd'], Description=request.json['description'], CreationDate=request.json['creationDate'], StartDate=request.json['startDate'], EndDate=request.json['endDate'], UserId=request.json['userId'])
+    v = VacationSolicitation(id=0, CreatorId=request.json['creator_id'], TargetId=0, Status=request.json['status'], VacationStart=request.json['vacation_start'], VacationEnd=request.json['vacation_end'], Description=request.json['description'], CreationDate=request.json['creation_date'], StartDate=request.json['start_date'], EndDate=request.json['end_date'], UserId=0)
+    
+    #Trata as dadas
+    v.CreationDate = v.CreationDate[0:10]
+    v.StartDate = v.StartDate[0:10]
+    v.EndDate = v.EndDate[0:10]
+    v.VacationStart = v.VacationStart[0:10]
+    v.VacationEnd = v.VacationEnd[0:10]
+    
     # retorna o resultado da função da DAO, caso positivo tem status 200
     return vacationSolicitationDao.InsertVacationSolicitation(v)
 

@@ -4,6 +4,16 @@ from flask import jsonify, Request, Response
 from dao import reportsDao
 from model.reportsModel import Reports as Report
 
+# Recupera todos os reports do banco de dados
+def GetAllReports() -> Response:
+    # Solicita à dao todos os reports
+    reports = reportsDao.GetAllReports()
+    # Converte cada resultado para um dicionário, para facilitar a conversão para JSON
+    reports_list = [r.__dict__() for r in reports]
+    # Retorna a lista de reports em formato JSON
+    return jsonify(reports_list)
+
+
 # Recupera o id de um report a partir da query string e solicita o report ao DAO
 def GetReportById(request: Request) -> str:
     # Recupera o id do report nos argumentos da request

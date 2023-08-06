@@ -2,6 +2,27 @@ from dao import dao
 from model import reportsModel as report
 from flask import Response
 
+def GetAllReports() -> Response:
+    # Abre a conexão com o banco de dados
+    connection = dao.OpenConnection()
+    # Cria um cursor para executar as queries sql
+    cursor = connection.cursor()
+    # Query a ser executada
+    query = '''
+        SELECT * FROM report
+        '''
+    # Executa a query
+    cursor.execute(query)
+    # Cria uma lista vazia para armazenar os relatórios que serão retornados
+    ret_list = []
+    # Para cada linha retornada pela query, cria um objeto do tipo Report e adiciona na lista
+    for row in cursor:
+        ret_list.append(report.Reports(row[0], row[1], row[2], row[3], '', row[4], row[5], [row[6], row[7], row[8]]))
+    # Fecha a conexão com o banco de dados
+    connection.close()
+    # Retorna a lista de relatórios
+    return ret_list
+
 # Retorna uma lista de todos os relatórios
 def GetReportById(id: int) -> report:
     # Abre a conexão com o banco de dados

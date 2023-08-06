@@ -3,6 +3,8 @@ from dao import candidateDao
 from model.candidatesModel import Candidate
 import datetime
 import Utils
+from model.userModel import User
+from dao import userDao
 
 # Insere um novo candidato no banco de dados com os dados vindos do front-end
 # Campos de arquivo estão como path, não como arquivo
@@ -38,3 +40,28 @@ def GetCandidateById(request) -> Response:
     id = request.args.get('id')
     # Chama a função da DAO que recupera o candidato no banco de dados
     return jsonify(candidateDao.GetCandidateById(id)._dict_())
+
+
+# Aprova um candidato, tornando-o um usuario
+def ApproveCandidate(request):
+    # Recupera o cpf do candidato nos argumentos da request
+    cpf = request.json['cpf']
+
+    #Recupera o candidado para a dao.
+    c = candidateDao.GetCandidateByCpf(cpf)
+
+    # Cria um objeto do tipo usuario com os dados do candidato aprovado
+    u = User(
+        Id=0,
+        Username=c.CandidateName,
+        Password="password",
+        Cpf=c.Cpf,
+        Gender=c.Gender,
+        RoleName="PROGRAMADOR",
+        RoleId="068",
+        Cbo="741526",
+    )
+    userDao.InsertUser(u)
+
+    # Chama a função da DAO que aprova o candidato no banco de dados
+    return Response(status=200)

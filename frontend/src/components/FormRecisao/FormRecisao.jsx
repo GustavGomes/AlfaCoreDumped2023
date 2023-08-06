@@ -15,7 +15,6 @@ function FormRecisao() {
         start_date: "",
         end_date: "",
         user_id: "",
-
     });
     // HANDLE FORM + CONEXAO API-------
     const handleChange = (e) => {
@@ -30,22 +29,27 @@ function FormRecisao() {
         event.preventDefault();
 
         // Cria um objeto JSON com os dados do formulário
-        const formData = {
-
-        };
+        const formData = {};
 
         // Imprime o JSON no console para fins de teste
         console.log(formData);
 
         // setar dados: creator_id, target_id -------------
-
+        recission.creator_id = localStorage.getItem("userCpf");
+        recission.target_id = 0;
+        recission.status = "pendente";
+        recission.creation_date = new Date();
+        recission.start_date = new Date();;
+        recission.end_date = new Date();;
+        recission.user_id = recission.creator_id;
+        console.log(recission);
         // conexao a api
         fetch("http://192.168.5.184:5066/api/insertRescissionSolicitation", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(recission),
         })
             .then((response) => response.json())
             .then((data) => {
@@ -124,7 +128,7 @@ function FormRecisao() {
                     <div className="col-12">
                         <p className="form--text">De 1 a 5, quanto você recomendaria esse profissional?:</p>
                         <label>
-                            <select name="" value={recission.rank} onChange={handleChange}>
+                            <select name="rank" value={recission.rank} onChange={handleChange}>
                                 <option value="0" disabled>0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
