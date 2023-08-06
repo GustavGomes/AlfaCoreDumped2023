@@ -1,4 +1,6 @@
+# Classe para representar a tabela de solicitação de rescisão
 class RescissionSolicitation:
+    # Construtor da classe
     def __init__(self, id, CreatorId, TargetId, Status, Rank, Reason, Description, CreationDate, StartDate,
                  EndDate, UserId):
         
@@ -13,7 +15,8 @@ class RescissionSolicitation:
         self.StartDate = StartDate
         self.EndDate = EndDate
         self.UserId = UserId
-    
+
+    # Retorna um dicionário com os dados da classe para facilitar a conversão para JSON
     def _dict_(self) -> dict:
         return {
             'id': self.id,

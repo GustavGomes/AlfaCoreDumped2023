@@ -1,4 +1,6 @@
+# Classe para representar a tabela de usuários
 class User:
+    # Construtor da classe
     def __init__(self,Id='', Username='', Password='', Cpf='', Gender='', RoleName='', RoleId='', Cbo='', Permission=''):
         self.Id = Id
         self.Username = Username
@@ -11,6 +13,7 @@ class User:
         self.Permission = Permission
     
 
+    # Retorna um dicionário com os dados da classe para facilitar a conversão para JSON
     def __dict__(self) -> dict:
         return {
             'Id': self.Id,

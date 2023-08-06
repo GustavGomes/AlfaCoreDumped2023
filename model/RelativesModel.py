@@ -1,4 +1,6 @@
+# Classe para representar a tabela de dependentes de um candidato
 class Relatives:
+    # Construtor da classe
     def __init__(self, Id='', CandidateId='', Cpf='', Name='', Kinship='', Birthday=''):
         self.Id = Id
         self.CandidateId = CandidateId
@@ -7,6 +9,7 @@ class Relatives:
         self.Kinship = Kinship
         self.Birthday = Birthday
 
+    # Retorna um dicionário com os dados da classe para facilitar a conversão para JSON
     def __dict__(self) -> dict:
         return {
             'Id': self.Id,

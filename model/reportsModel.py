@@ -1,4 +1,6 @@
+# Classe para representar a tabela de relatórios 
 class Reports:
+    # Construtor da classe
     def __init__(self, Id='', ReporterName='', CostCenter='', Description='', OperationField='', CreatedAt='', Location='', images=[]):
         self.Id = Id
         self.ReporterName = ReporterName
@@ -9,6 +11,7 @@ class Reports:
         self.Location = Location
         self.images = images
 
+    # Retorna um dicionário com os dados da classe para facilitar a conversão para JSON
     def __dict__(self) -> dict:
         return {
             'Id': self.Id,
