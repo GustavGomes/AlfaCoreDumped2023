@@ -59,11 +59,11 @@ def InsertReport(r: report.Reports) -> Response:
     cursor = connection.cursor()
     # Query a ser executada
     query = '''
-        INSERT INTO report (id, reporter_name, cost_center, description, creation_date, location, picture_one_path, picture_two_path, picture_three_path) 
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s);
+        INSERT INTO report (reporter_name, cost_center, description, creation_date, location, picture_one_path, picture_two_path, picture_three_path) 
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s);
         '''
     # Dados a serem passados para a query
-    data = (r.Id, r.ReporterName, r.CostCenter, r.Description, r.CreatedAt, r.Location, r.images[0], r.images[1], r.images[2])
+    data = (r.ReporterName, r.CostCenter, r.Description, r.CreatedAt, r.Location, r.images[0], r.images[1], r.images[2])
     # Executa a query mesclando-a com os dados
     cursor.execute(query, data)
     # Salva as alterações no banco de dados

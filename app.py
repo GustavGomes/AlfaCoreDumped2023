@@ -100,6 +100,7 @@ def GetReportByLocation():
 
 @app.route('/api/insertReport', methods=['POST'])
 def InsertReport():
+    print("InsertReport request received")
     return ReportService.InsertReport(request)
 
 #------------ Solicitação de férias ----------------

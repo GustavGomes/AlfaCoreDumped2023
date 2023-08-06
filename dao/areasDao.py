@@ -62,11 +62,11 @@ def InsertArea(a: area) -> Response:
     cursor = connection.cursor()
     # Query a ser executada
     query = '''
-        INSERT INTO area (id, code, description, liberation_status, pdf_path) 
-        VALUES (%s,%s,%s,%s,%s);
+        INSERT INTO area (code, description, liberation_status, pdf_path) 
+        VALUES (%s,%s,%s,%s);
         '''
     # Dados a serem passados para a query
-    data = (a.Id, a.Code, a.Description, a.LiberationStatus, a.PdfFile)
+    data = (a.Code, a.Description, a.LiberationStatus, a.PdfFile)
     # Executa a query mesclando-a com os dados
     cursor.execute(query, data)
     # Salva as alterações no banco de dados

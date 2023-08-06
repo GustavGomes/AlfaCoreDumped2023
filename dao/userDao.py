@@ -36,11 +36,11 @@ def InsertUser(u: user) -> Response:
     cursor = connection.cursor()
     # Query a ser executada
     query = '''
-        INSERT INTO user (Id, UserName, Password, Cpf, Gender, Role, RoleId, Cbo, Permission) 
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s);
+        INSERT INTO user (UserName, Password, Cpf, Gender, Role, RoleId, Cbo, Permission) 
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s);
         '''
     # Dados a serem passados para a query
-    data = (u.Id, u.Username, u.Password, u.Cpf, u.Gender
+    data = (u.Username, u.Password, u.Cpf, u.Gender
             , u.RoleName, u.RoleId, u.Cbo,u.Permission)
     # Executa a query mesclando-a com os dados
     cursor.execute(query, data)

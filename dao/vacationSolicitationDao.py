@@ -61,11 +61,11 @@ def InsertVacationSolicitation(v: vacationSolicitation) -> Response:
     cursor = connection.cursor()
     # Query a ser executada
     query = '''
-        INSERT INTO vacationsolicitation (id, creatorid, targetid, status, vacation_start, vacation_end, description, creation_date, start_date, end_date, user_id)
-        Values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+        INSERT INTO vacationsolicitation (creatorid, targetid, status, vacation_start, vacation_end, description, creation_date, start_date, end_date, user_id)
+        Values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
         '''
     # Dados a serem passados para a query
-    data = (v.id, v.CreatorId, v.TargetId, v.Status, v.VacationStart, v.VacationEnd, v.Description, v.CreationDate, v.StartDate, v.EndDate, v.UserId)
+    data = (v.CreatorId, v.TargetId, v.Status, v.VacationStart, v.VacationEnd, v.Description, v.CreationDate, v.StartDate, v.EndDate, v.UserId)
     # Executa a query mesclando-a com os dados
     cursor.execute(query, data)
     # Salva as alterações no banco de dados
