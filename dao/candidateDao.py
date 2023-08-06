@@ -53,6 +53,33 @@ def GetCandidateById(id: int) -> Response:
     # Se a query retornar mais de uma linha, retorna Null
     return None
 
+def GetCandidateByCpf(cpf:str) -> Response:
+    # Abre a conexão com o banco de dados
+    connection = dao.OpenConnection()
+    # Cria um cursor para executar as queries sql
+    cursor = connection.cursor()
+    # Query a ser executada
+    query = '''
+        SELECT * FROM candidate WHERE cpf = %s
+        '''
+    # Dados a serem passados para a query
+    data = (cpf,)
+    # Executa a query mesclando-a com os dados, ou seja, o id passado
+    cursor.execute(query, data)
+    # Se a query retornar apenas uma linha, cria um objeto do tipo Candidate e retorna
+    if cursor.arraysize == 1:
+        try:
+            # Recupera a única linha retornada pela query
+            row = cursor.fetchone()
+            # Retorna o objeto do tipo Candidate
+            return candidate.Candidate(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11], row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22], row[23], row[24], row[25], row[26], row[27], row[28], row[29], row[30], row[31], row[32], row[33], row[34], row[35], row[36], row[37], row[38], row[39], row[40], row[41])
+        except:
+            pass
+    # Fecha a conexão com o banco de dados
+    connection.close()
+    # Se a query retornar mais de uma linha, retorna Null
+    return None
+
 # Insere um candidato no banco de dados
 def InsertCandidate(c: candidate) -> Response:
     # Abre a conexão com o banco de dados

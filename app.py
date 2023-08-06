@@ -88,12 +88,18 @@ def GetCandidates():
 def GetCandidateById():
     return CandidateService.GetCandidateById(request)
 
+@app.route('/api/approveCandidate', methods=['POST'])
+def ApproveCandidate():
+    print("Approve Candidate")
+    return CandidateService.ApproveCandidate(request)
+
 
 #-----------Reports----------------
 @app.route('/api/getReportById', methods=['GET'])
 def GetReportById():
-    return ReportService.GetReportById(request)
-
+    c = ReportService.GetReportById(request)
+    print(c)
+    return c
 @app.route('/api/getReportByLocation', methods=['GET'])
 def GetReportByLocation():
     return ReportService.GetReportByLocation(request)
@@ -102,6 +108,11 @@ def GetReportByLocation():
 def InsertReport():
     print("InsertReport request received")
     return ReportService.InsertReport(request)
+
+@app.route('/api/getReports', methods=['GET'])
+def GetReports():
+    print("GetReports request received")
+    return ReportService.GetAllReports()
 
 #------------ Solicitação de férias ----------------
 

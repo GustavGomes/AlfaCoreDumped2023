@@ -5,6 +5,19 @@ import "./usuario.css"
 export default function Usuario() {
     const [candidates, setCandidates] = useState([]);
 
+    function ApproveCandidate(cpf) {
+        fetch("http://192.168.5.184:5066/api/getCandidates", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                "cpf":candidates
+            }),
+        })
+
+    }
+
     useEffect(() => {
         fetch("http://192.168.5.184:5066/api/getCandidates")
             .then((response) => response.json())
@@ -32,7 +45,7 @@ export default function Usuario() {
                         <p>Email: {candidate.Email} </p>
                         <p className="ultimo">Telefone: {candidate.TelephoneNumber} </p>
                         <div className="d-flex justify-content-end">
-                            <button className="btn accordion">aprovar</button>
+                            <button onClick={() => {ApproveCandidate(candidate.cpf)}} className="btn accordion">aprovar</button>
                         </div>
                     </Accordion.Body>
                 </Accordion.Item>
