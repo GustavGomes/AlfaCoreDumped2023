@@ -5,11 +5,15 @@
     margin-right: 30px;
 }
 
-input, textarea {
+input, textarea, select {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+  }
+
+  select {
+    margin-top: 8px;
   }
 
   input:focus {
