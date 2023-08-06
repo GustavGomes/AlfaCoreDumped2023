@@ -44,7 +44,7 @@ const PersonForm = () => {
         lodged: "",
         pcd: "",
         cnh_file: "",
-        has_friend_familiar: "",
+        has_friend_familiar: 0,
     });
 
 
@@ -54,6 +54,7 @@ const PersonForm = () => {
         setPerson((prevPerson) => ({ ...prevPerson, [name]: value }));
     };
 
+    const [file, setFile] = useState(null);
     function handleFileChange(e) {
         setFile(e.target.files[0])
     }
@@ -86,45 +87,34 @@ const PersonForm = () => {
                     console.error("Erro ao enviar os dados:", error);
                 });
 
-            const url = 'http://192.168.5.184:5066/api/uploadFile';
-            // const formData = new FormData();
-            // formData.append('file', file);
-            // formData.append('fileName', file.name);
-            // const config = {
-            //     headers: {
-            //         'content-type': 'multipart/form-data',
-            //     },
-            // };
-            // axios.post(url, formData, config).then((response) => {
-            //     console.log(response.data);
-            // });
-            base64File = ''
-            reader = new FileReader();
-            reader.onload = function(event) {
-                const base64String = event.target.result.split(',')[1];
-                base64File = base64String;
+            // enviar o arquivo como base64
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    const base64String = event.target.result.split(',')[1];
+                    // Realizar a requisição ao servidor para enviar o arquivo como base64
+                    fetch("http://192.168.5.184:5066/api/uploadFile", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            'cpf': person.cpf,
+                            'fileName': file.name,
+                            'type': file.type.split('/')[1],
+                            '64base': base64String,
+                        }),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log("Resposta do servidor:", data);
+                        })
+                        .catch((error) => {
+                            console.error("Erro ao enviar o arquivo:", error);
+                        });
+                };
+                reader.readAsDataURL(file);
             }
-            // Realiza a requisição ao servidor
-            fetch("http://192.168.5.184:5066/api/uploadFile", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    'cpf': person.cpf,
-                    'fileName': file.name,
-                    'type': file.type.split('/')[1],
-                    '64base': base64File
-                }),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log("Resposta do servidor:", data);
-                })
-                .catch((error) => {
-                    console.error("Erro ao enviar os dados:", error);
-                });
-
         } else {
             console.error('O consentimento é obrigatório!');
         }
@@ -148,6 +138,7 @@ const PersonForm = () => {
                                     value={person.name}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required  
                                 />
                             </label>
                         </div>
@@ -161,6 +152,7 @@ const PersonForm = () => {
                                     value={person.mother_name}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required  
                                 />
                             </label>
 
@@ -173,6 +165,7 @@ const PersonForm = () => {
                                         value={person.father_Name}
                                         onChange={handleChange}
                                         className="input--form"
+                                        required  
                                     />
                                 </label>
                             </div>
@@ -254,6 +247,7 @@ const PersonForm = () => {
                                     value={person.birth_Date}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required  
                                 />
                             </label>
                         </div>
@@ -267,6 +261,7 @@ const PersonForm = () => {
                                     value={person.nacionality}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required  
                                 />
                             </label>
                         </div>
@@ -280,6 +275,7 @@ const PersonForm = () => {
                                     value={person.birth_country}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required  
                                 />
                             </label>
                         </div>
@@ -325,6 +321,7 @@ const PersonForm = () => {
                                     value={person.shoe_size}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required  
                                 />
                             </label>
                         </div>
@@ -337,6 +334,7 @@ const PersonForm = () => {
                                     value={person.pants_size}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required  
                                 />
                             </label>
                         </div>
@@ -349,6 +347,7 @@ const PersonForm = () => {
                                     value={person.shirt_size}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required  
                                 />
                             </label>
                         </div>
@@ -359,7 +358,7 @@ const PersonForm = () => {
                     <div className="row">
                         <h3 className="form--titulo col-12">Contato</h3>
                         <div className="form-group col-md-6">
-                            <p className="form--text">Telefone:</p>
+                            <p className="form--text">Telefone (dddnumero)</p>
                             <label>
                                 <input
                                     type="text"
@@ -367,6 +366,7 @@ const PersonForm = () => {
                                     value={person.telephone_number}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required  
                                 />
                             </label>
                         </div>
@@ -379,6 +379,21 @@ const PersonForm = () => {
                                     value={person.second_telephone_number}
                                     onChange={handleChange}
                                     className="input--form"
+                                />
+                            </label>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="form-group col-12">
+                            <p className="form--text">Email</p>
+                            <label>
+                                <input
+                                    type="text"
+                                    name="email"
+                                    value={person.email}
+                                    onChange={handleChange}
+                                    className="input--form"
+                                    required  
                                 />
                             </label>
                         </div>
@@ -397,6 +412,7 @@ const PersonForm = () => {
                                     value={person.cep}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -423,6 +439,7 @@ const PersonForm = () => {
                                     value={person.state}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -438,6 +455,7 @@ const PersonForm = () => {
                                     value={person.city}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -451,6 +469,7 @@ const PersonForm = () => {
                                     value={person.neighborhood}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -458,7 +477,7 @@ const PersonForm = () => {
                         <div className="form-group col-md-4">
                             <p className="form--text">Tipo de Logradouro:</p>
                             <label>
-                                <select name="ethnicity" value={person.residency_type} onChange={handleChange}>
+                                <select name="residency_type" value={person.residency_type} onChange={handleChange}>
                                     <option value="" disabled>
                                         Escolher
                                     </option>
@@ -479,6 +498,7 @@ const PersonForm = () => {
                                     value={person.street}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -492,6 +512,7 @@ const PersonForm = () => {
                                     value={person.residency_number}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -529,6 +550,7 @@ const PersonForm = () => {
                                     value={person.rg_number}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -542,6 +564,7 @@ const PersonForm = () => {
                                     value={person.rg_emissor_organ}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -557,6 +580,7 @@ const PersonForm = () => {
                                     value={person.rg_emissor_state}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -570,6 +594,7 @@ const PersonForm = () => {
                                     value={person.rg_emissor_city}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -585,6 +610,7 @@ const PersonForm = () => {
                                     value={person.rg_release_date}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -598,6 +624,7 @@ const PersonForm = () => {
                                     value={person.cpf}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -613,6 +640,7 @@ const PersonForm = () => {
                                     value={person.pispasep}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
@@ -635,6 +663,7 @@ const PersonForm = () => {
                                     value={person.function}
                                     onChange={handleChange}
                                     className="input--form"
+                                    required
                                 />
                             </label>
                         </div>
