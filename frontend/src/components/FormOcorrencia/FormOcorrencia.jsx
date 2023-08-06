@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import "./formOcorrencia.css";
 
 function FormOcorrencia() {
+    // ---- OCORRENCIA ----
     const [occurrence, setOccurrence] = useState({
         reporter_name: "",
         cost_center: "",
         description: "",
         operation_field: "",
-        location: ""
+        location: "",
     });
     const [occurrences, setOccurrences] = useState([]);
-
+    
+    // ------------ HANDLE FORM ----------------
     const handleChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
@@ -29,23 +31,70 @@ function FormOcorrencia() {
             occurrence.reporter_name &&
             occurrence.cost_center &&
             occurrence.description &&
-            occurrence.operation_field &&
-            occurrence.location
+            occurrence.operation_field
         ) {
-            const newOccurrence = {
-                ...occurrence,
-                id: new Date().getTime().toString()
-            };
-            setOccurrences([...occurrences, newOccurrence]);
-            setOccurrence({
-                reporter_name: "",
-                cost_center: "",
-                description: "",
-                operation_field: "",
-                location: ""
-            });
+            // Cria uma cópia da ocorrência atual para enviar para a API
+            const occurrenceToSend = { ...occurrence };
+
+            // Se a geolocalização estiver disponível, adiciona-a à ocorrência
+            getLocation()
+                .then((location) => {
+                    occurrenceToSend.location = `${location.latitude}, ${location.longitude}`;
+                })
+                .catch((error) => {
+                    console.error("Erro ao obter a geolocalização:", error);
+                })
+                .finally(() => {
+                    // Envia a ocorrência (com ou sem a localização) para a API
+                    fetch("http://192.168.5.184:5066/api/insertReport", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(occurrenceToSend),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log("Resposta do servidor:", data);
+                        })
+                        .catch((error) => {
+                            console.error("Erro ao enviar os dados:", error);
+                        });
+
+                    // Adiciona a ocorrência enviada à lista de ocorrências
+                    setOccurrences([...occurrences, occurrenceToSend]);
+                    // Reseta o formulário
+                    setOccurrence({
+                        reporter_name: "",
+                        cost_center: "",
+                        description: "",
+                        operation_field: "",
+                        location: "",
+                    });
+                });
         }
     };
+
+    // ------------ OBTER GEOLOCALIZACAO  ----------------
+    const getLocation = () => {
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        resolve({ latitude, longitude });
+                    },
+                    (error) => {
+                        reject(error);
+                    }
+                );
+            } else {
+                reject(new Error("Geolocation is not supported by this browser."));
+            }
+        });
+    };
+
 
     return (
         <div className="form-container">
@@ -118,7 +167,7 @@ function FormOcorrencia() {
                 </div>
 
                 <div className="text-center">
-                    <button className='btn' type="submit" onClick={handleSubmit}>
+                    <button className='btn' type="submit" onClick={handleSubmit} >
                         Enviar Relato
                     </button>
                 </div>

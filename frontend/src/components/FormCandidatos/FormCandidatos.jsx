@@ -4,6 +4,7 @@ import "./formCandidatos.css"
 import axios from 'axios';
 import { FormCheck } from "react-bootstrap";
 const PersonForm = () => {
+    // ------------ PERSON  ----------------
     const [person, setPerson] = useState({
         name: "",
         mother_name: "",
@@ -47,7 +48,7 @@ const PersonForm = () => {
     });
 
 
-
+    // ------------ HANDLE FORM  ----------------
     const handleChange = (e) => {
         const { name, value } = e.target;
         setPerson((prevPerson) => ({ ...prevPerson, [name]: value }));
