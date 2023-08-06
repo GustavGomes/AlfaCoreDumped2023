@@ -38,7 +38,7 @@ export default function (props) {
                     localStorage.setItem("roleName", data.RoleName);
                     localStorage.setItem("roleName", data.RoleName);
                     localStorage.setItem('userCpf', data.Cpf);
-                    window.location.reload();
+                    
                 }
             })
             .catch(error => {

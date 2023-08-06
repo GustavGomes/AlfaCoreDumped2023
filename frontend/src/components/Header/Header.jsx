@@ -26,7 +26,7 @@ export default function Header() {
                                 <Dropdown.Menu>
                                     <Dropdown.Item as={Link} to="/ocorrencias">Ocorrências</Dropdown.Item>
                                     <Dropdown.Item as={Link} to="/usuariosCadastrados">Candidatos</Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="/relatorios">Solicitações</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/solicitacoes">Solicitações</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                             <Dropdown>

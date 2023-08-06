@@ -11,7 +11,7 @@ import CadastroRescisao from './routes/CadastroRescisao/CadastroRescisao';;
 import CadastroAreaEquip from './routes/CadastroAreaEquip/CadastroAreaEquip';
 import VerUsuariosCadastrados from './routes/VerUsuariosCadastrados/VerUsuariosCadastrados';
 import VerRelatorios from './routes/VerRelatorios/VerRelatorios';
-import VerOcorrencias from './routes/CadastroOcorrencia/CadastroOcorrencia';
+import VerSolicitacoes from './routes/CadastroOcorrencia/CadastroOcorrencia';
 
 import App from './App';
 
@@ -66,8 +66,8 @@ const routes = [
         element: isAuthenticated() ? <VerUsuariosCadastrados /> : <Navigate to="/login" />
       },
       {
-        path: "/ocorrencias",
-        element: isAuthenticated() ? <VerOcorrencias /> : <Navigate to="/login" />
+        path: "/solicitacoes",
+        element: isAuthenticated() ? <VerSolicitacoes /> : <Navigate to="/login" />
       },
     ]
   },
