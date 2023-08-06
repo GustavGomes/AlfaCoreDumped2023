@@ -29,7 +29,7 @@ const routes = [
     children: [
       {
         path: "/", 
-        element: <Home />
+        element: <Login />
       },
       {
         path: "/ocorrencias", 
@@ -41,7 +41,7 @@ const routes = [
       },
       {
         path: "/login", 
-        element: isAuthenticated() ? <Navigate to="/" /> : <Login /> 
+        element: isAuthenticated() ? <Navigate to="/cadastroSolicitacao" /> : <Login /> 
       },
       {
         path: "/cadastroSolicitacao",

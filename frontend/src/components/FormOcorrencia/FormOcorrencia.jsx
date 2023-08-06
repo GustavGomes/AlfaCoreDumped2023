@@ -100,7 +100,7 @@ function FormOcorrencia() {
         <div className="form-container">
             <div className="row">
                 <div className="col-12">
-                    <h1 className="text-center">Envie um Relato</h1>
+                    <h1 className="text-center">Envie umA oCORRÊNCIA</h1>
                 </div>
             </div>
 
