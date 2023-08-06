@@ -1,7 +1,10 @@
+
 import React, { useState } from "react";
 import "./formCandidatos.css"
+import axios from 'axios';
 import { FormCheck } from "react-bootstrap";
 const PersonForm = () => {
+    // ------------ PERSON  ----------------
     const [person, setPerson] = useState({
         name: "",
         mother_name: "",
@@ -40,14 +43,20 @@ const PersonForm = () => {
         function: "",
         lodged: "",
         pcd: "",
+        cnh_file: "",
+        has_friend_familiar: "",
     });
 
 
-
+    // ------------ HANDLE FORM  ----------------
     const handleChange = (e) => {
         const { name, value } = e.target;
         setPerson((prevPerson) => ({ ...prevPerson, [name]: value }));
     };
+
+    function handleFileChange(e) {
+        setFile(e.target.files[0])
+    }
 
     const [consentChecked, setConsentChecked] = useState(false);
 
@@ -57,114 +66,68 @@ const PersonForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        test = {
-            "id": 123,
-            "candidateName": "John Doe",
-            "motherName": "Jane Doe",
-            "fatherName": "John Doe Sr.",
-            "gender": "Male",
-            "civiState": "Single",
-            "educationLevel": "Bachelor's Degree",
-            "ethnicity": "Caucasian",
-            "birthDate": "1990-01-01",
-            "nacionality": "American",
-            "birthCountry": "United States",
-            "birthState": "California",
-            "birthCity": "Los Angeles",
-            "shoeSize": "10",
-            "pantsSize": "32",
-            "shirtSize": "Medium",
-            "telephoneNumber": "123-456-7890",
-            "secondTelephoneNumber": "987-654-3210",
-            "email": "john.doe@example.com",
-            "cep": "12345-678",
-            "country": "United States",
-            "state": "California",
-            "city": "San Francisco",
-            "neighborhood": "Downtown",
-            "residencyType": "Apartment",
-            "street": "123 Main Street",
-            "residencyNumber": 4,
-            "complement": "Apartment complex",
-            "rgNumber": "ABC12345",
-            "rgEmissorCity": "Los Angeles",
-            "rgReleaseDate": "2010-05-15",
-            "cpf": "12345678901",
-            "pispasep": "12345678900",
-            "function": "Software Engineer",
-            "lodged": true,
-            "pcd": false,
-            "rgFile": "base64_encoded_rg_file",
-            "cpfFile": "base64_encoded_cpf_file",
-            "resumeFile": "base64_encoded_resume_file",
-            "cnhFile": "base64_encoded_cnh_file",
-            "armyFile": "base64_encoded_army_file",
-            "hasFriendFamiliar": true
-        }
-        
-        responseJson ={
-            "id": 123,
-            "candidateName": person.name,
-            "motherName": person.mother_name,
-            "fatherName": person.father_Name,
-            "gender": person.genre,
-            "civiState": person.civil_state,
-            "educationLevel": person.education_level,
-            "ethnicity": person.ethnicity,
-            "birthDate": person.birth_Date,
-            "nacionality": person.nacionality,
-            "birthCountry": person.birth_country,
-            "birthState": person.birth_state,
-            "birthCity": person.birth_city,
-            "shoeSize": person.shoe_size,
-            "pantsSize": person.pants_size,
-            "shirtSize": person.shirt_size,
-            "telephoneNumber": person.telephone_number,
-            "secondTelephoneNumber": person.second_telephone_number,
-            "email": person.email,
-            "cep": person.cep,
-            "country": person.country,
-            "state": person.state,
-            "city": person.city,
-            "neighborhood": person.neighborhood,
-            "residencyType": person.residency_type,
-            "street": person.street,
-            "residencyNumber": person.residency_number,
-            "complement": person.complement,
-            "rgNumber": person.rg_number,
-            "rgEmissorCity": person.rg_emissor_city,
-            "rgReleaseDate": person.rg_release_date,
-            "cpf": person.cpf,
-            "pispasep": person.pispasep,
-            "function": person.function,
-            "lodged": person.lodged,
-            "pcd": person.pcd,
-            "rgFile": person.rgFile,
-            "cpfFile": person.cpfFile,
-            "resumeFile": person.resumeFile,
-            "cnhFile": person.cnhFile,
-            "armyFile": person.armyFile,
-            "hasFriendFamiliar": person.hasFriendFamiliar
-        }
+        if (consentChecked) {
+            // Realize as ações necessárias com o consentimento concedido
+            console.log('Consentimento concedido!');
 
-        fetch('https://localhost:5066/api/candidate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(responseJson),
-        
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-                console.log("Dados enviados com sucesso!")
+            // Realizar a requisição ao servidor
+            fetch("http://192.168.5.184:5066/api/insertCandidate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(person),
             })
-            .catch((error) => {
-                console.error('Error:', error);
-                console.log("Erro ao enviar dados!")
-            });
-        // Aqui você pode enviar os dados da pessoa para o servidor ou fazer outras ações necessárias com os dados
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Resposta do servidor:", data);
+                })
+                .catch((error) => {
+                    console.error("Erro ao enviar os dados:", error);
+                });
+
+            const url = 'http://192.168.5.184:5066/api/uploadFile';
+            // const formData = new FormData();
+            // formData.append('file', file);
+            // formData.append('fileName', file.name);
+            // const config = {
+            //     headers: {
+            //         'content-type': 'multipart/form-data',
+            //     },
+            // };
+            // axios.post(url, formData, config).then((response) => {
+            //     console.log(response.data);
+            // });
+            base64File = ''
+            reader = new FileReader();
+            reader.onload = function(event) {
+                const base64String = event.target.result.split(',')[1];
+                base64File = base64String;
+            }
+            // Realiza a requisição ao servidor
+            fetch("http://192.168.5.184:5066/api/uploadFile", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    'cpf': person.cpf,
+                    'fileName': file.name,
+                    'type': file.type.split('/')[1],
+                    '64base': base64File
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Resposta do servidor:", data);
+                })
+                .catch((error) => {
+                    console.error("Erro ao enviar os dados:", error);
+                });
+
+        } else {
+            console.error('O consentimento é obrigatório!');
+        }
     };
 
     return (
@@ -220,6 +183,9 @@ const PersonForm = () => {
                             <p className="form--text">Sexo:</p>
                             <label>
                                 <select name="genre" value={person.genre} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="homem">Homem</option>
                                     <option value="mulher">Mulher</option>
                                     <option value="ND">prefiro não responder</option>
@@ -231,6 +197,9 @@ const PersonForm = () => {
                             <p className="form--text">Estado Civil:</p>
                             <label>
                                 <select name="civil_state" value={person.civil_state} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="solteiro">Solteiro</option>
                                     <option value="casado">Casado</option>
                                     <option value="separado">Separado</option>
@@ -244,6 +213,9 @@ const PersonForm = () => {
                             <p className="form--text">Grau:</p>
                             <label>
                                 <select name="education_level" value={person.education_level} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="fundamental">Fundamental</option>
                                     <option value="medio">Medio</option>
                                     <option value="superior">Superior</option>
@@ -255,6 +227,9 @@ const PersonForm = () => {
                             <p className="form--text">Raça/Cor:</p>
                             <label>
                                 <select name="ethnicity" value={person.ethnicity} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="branca">Branca</option>
                                     <option value="preta">Preta</option>
                                     <option value="parda">Parda</option>
@@ -271,7 +246,7 @@ const PersonForm = () => {
                     <div className="row">
                         <h3 className="form--titulo col-12">Dados de Nascimento</h3>
                         <div className="form-group col-md-4">
-                            <p className="form--text">Data de Nascimento:</p> 
+                            <p className="form--text">Data de Nascimento:</p>
                             <label>
                                 <input
                                     type="date"
@@ -284,7 +259,7 @@ const PersonForm = () => {
                         </div>
 
                         <div className="form-group col-md-4">
-                            <p className="form--text">Nacionalidade:</p> 
+                            <p className="form--text">Nacionalidade:</p>
                             <label>
                                 <input
                                     type="text"
@@ -297,7 +272,7 @@ const PersonForm = () => {
                         </div>
 
                         <div className="form-group col-md-4">
-                            <p className="form--text">País de Nascimento:</p> 
+                            <p className="form--text">País de Nascimento:</p>
                             <label>
                                 <input
                                     type="text"
@@ -312,7 +287,7 @@ const PersonForm = () => {
 
                     <div className="row">
                         <div className="form-group col-md-6">
-                            <p className="form--text">Estado de Nascimento:</p> 
+                            <p className="form--text">Estado de Nascimento:</p>
                             <label>
                                 <input
                                     type="text"
@@ -324,7 +299,7 @@ const PersonForm = () => {
                             </label>
                         </div>
                         <div className="form-group col-md-6">
-                            <p className="form--text">Cidade de Nascimento:</p> 
+                            <p className="form--text">Cidade de Nascimento:</p>
                             <label>
                                 <input
                                     type="text"
@@ -342,7 +317,7 @@ const PersonForm = () => {
                     <div className="row">
                         <h3 className="form--titulo col-12">Tamanhos</h3>
                         <div className="form-group col-md-4">
-                            <p className="form--text">Botina:</p> 
+                            <p className="form--text">Botina:</p>
                             <label>
                                 <input
                                     type="number"
@@ -354,7 +329,7 @@ const PersonForm = () => {
                             </label>
                         </div>
                         <div className="form-group col-md-4">
-                            <p className="form--text">Número da Calça:</p> 
+                            <p className="form--text">Número da Calça:</p>
                             <label>
                                 <input
                                     type="number"
@@ -366,7 +341,7 @@ const PersonForm = () => {
                             </label>
                         </div>
                         <div className="form-group col-md-4">
-                            <p className="form--text">Tamanho da Camisa:</p> 
+                            <p className="form--text">Tamanho da Camisa:</p>
                             <label>
                                 <input
                                     type="number"
@@ -384,7 +359,7 @@ const PersonForm = () => {
                     <div className="row">
                         <h3 className="form--titulo col-12">Contato</h3>
                         <div className="form-group col-md-6">
-                            <p className="form--text">Telefone:</p> 
+                            <p className="form--text">Telefone:</p>
                             <label>
                                 <input
                                     type="text"
@@ -396,7 +371,7 @@ const PersonForm = () => {
                             </label>
                         </div>
                         <div className="form-group col-md-6">
-                            <p className="form--text">Telefone 02:</p> 
+                            <p className="form--text">Telefone 02:</p>
                             <label>
                                 <input
                                     type="text"
@@ -414,7 +389,7 @@ const PersonForm = () => {
                     <div className="row">
                         <h3 className="form--titulo col-12">Endereço</h3>
                         <div className="form-group col-md-4">
-                            <p className="form--text">CEP:</p> 
+                            <p className="form--text">CEP:</p>
                             <label>
                                 <input
                                     type="text"
@@ -427,7 +402,7 @@ const PersonForm = () => {
                         </div>
 
                         <div className="form-group col-md-4">
-                            <p className="form--text">País:</p> 
+                            <p className="form--text">País:</p>
                             <label>
                                 <input
                                     type="text"
@@ -440,7 +415,7 @@ const PersonForm = () => {
                         </div>
 
                         <div className="form-group col-md-4">
-                            <p className="form--text">Estado:</p> 
+                            <p className="form--text">Estado:</p>
                             <label>
                                 <input
                                     type="text"
@@ -455,7 +430,7 @@ const PersonForm = () => {
 
                     <div className="row">
                         <div className="form-group col-md-4">
-                            <p className="form--text">Cidade:</p> 
+                            <p className="form--text">Cidade:</p>
                             <label>
                                 <input
                                     type="text"
@@ -468,7 +443,7 @@ const PersonForm = () => {
                         </div>
 
                         <div className="form-group col-md-4">
-                            <p className="form--text">Bairro:</p> 
+                            <p className="form--text">Bairro:</p>
                             <label>
                                 <input
                                     type="text"
@@ -481,9 +456,12 @@ const PersonForm = () => {
                         </div>
 
                         <div className="form-group col-md-4">
-                            <p className="form--text">Tipo de Logradouro:</p> 
+                            <p className="form--text">Tipo de Logradouro:</p>
                             <label>
                                 <select name="ethnicity" value={person.residency_type} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="privado">Privado</option>
                                     <option value="publico">Público</option>
                                 </select>
@@ -493,7 +471,7 @@ const PersonForm = () => {
 
                     <div className="row">
                         <div className="form-group col-md-6">
-                            <p className="form--text">Endereço Residencial:</p> 
+                            <p className="form--text">Endereço Residencial:</p>
                             <label>
                                 <input
                                     type="text"
@@ -506,7 +484,7 @@ const PersonForm = () => {
                         </div>
 
                         <div className="form-group col-md-6">
-                            <p className="form--text">Número:</p> 
+                            <p className="form--text">Número:</p>
                             <label>
                                 <input
                                     type="number"
@@ -521,7 +499,7 @@ const PersonForm = () => {
 
                     <div className="row">
                         <div className="form-group col-md-12">
-                            <p className="form--text">Complemento:</p> 
+                            <p className="form--text">Complemento:</p>
                             <label>
                                 <input
                                     type="text"
@@ -543,7 +521,7 @@ const PersonForm = () => {
 
                     <div className="row">
                         <div className="form-group col-md-6">
-                            <p className="form--text">Número da Carteira de Identidade:</p> 
+                            <p className="form--text">Número da Carteira de Identidade:</p>
                             <label>
                                 <input
                                     type="text"
@@ -556,7 +534,7 @@ const PersonForm = () => {
                         </div>
 
                         <div className="form-group col-md-6">
-                            <p className="form--text">Orgão Emissor da Carteira de Identidade:</p> 
+                            <p className="form--text">Orgão Emissor da Carteira de Identidade:</p>
                             <label>
                                 <input
                                     type="text"
@@ -571,7 +549,7 @@ const PersonForm = () => {
 
                     <div className="row">
                         <div className="form-group col-md-6">
-                            <p className="form--text">Estado de Emissão da Identidade (RG)*:</p> 
+                            <p className="form--text">Estado de Emissão da Identidade (RG)*:</p>
                             <label>
                                 <input
                                     type="text"
@@ -584,7 +562,7 @@ const PersonForm = () => {
                         </div>
 
                         <div className="form-group col-md-6">
-                            <p className="form--text"> Cidade de Emissão da Identidade (RG):</p> 
+                            <p className="form--text"> Cidade de Emissão da Identidade (RG):</p>
                             <label>
                                 <input
                                     type="text"
@@ -599,8 +577,8 @@ const PersonForm = () => {
 
                     <div className="row">
                         <div className="form-group col-md-6">
-                            <p className="form--text">Data de Expedição da Identidade (RG):</p> 
-                            <label>    
+                            <p className="form--text">Data de Expedição da Identidade (RG):</p>
+                            <label>
                                 <input
                                     type="date"
                                     name="rg_release_date"
@@ -612,7 +590,7 @@ const PersonForm = () => {
                         </div>
 
                         <div className="form-group col-md-6">
-                            <p className="form--text">CPF:</p> 
+                            <p className="form--text">CPF:</p>
                             <label>
                                 <input
                                     type="text"
@@ -627,7 +605,7 @@ const PersonForm = () => {
 
                     <div className="row">
                         <div className="form-group col-md-6">
-                            <p className="form--text">PIS/PASEP:</p> 
+                            <p className="form--text">PIS/PASEP:</p>
                             <label>
                                 <input
                                     type="text"
@@ -649,7 +627,7 @@ const PersonForm = () => {
 
                     <div className="row">
                         <div className="form-group col-md-4">
-                            <p className="form--text">Função:</p> 
+                            <p className="form--text">Função:</p>
                             <label>
                                 <input
                                     type="text"
@@ -662,9 +640,12 @@ const PersonForm = () => {
                         </div>
 
                         <div className="form-group col-md-4">
-                            <p className="form--text">Alojado:</p> 
+                            <p className="form--text">Alojado:</p>
                             <label>
                                 <select name="lodged" value={person.lodged} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="sim">Sim</option>
                                     <option value="não">Não</option>
                                 </select>
@@ -675,11 +656,23 @@ const PersonForm = () => {
                             <p className="form--text">PCD:</p>
                             <label>
                                 <select name="pcd" value={person.pcd} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="sim">Sim</option>
                                     <option value="não">Não</option>
                                     <option value="ND">prefiro não responder</option>
                                 </select>
                             </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="form--secao">
+                    <h3 className="form--titulo">Anexar Documento</h3>
+                    <div className="row">
+                        <div className="form-group col-12">
+                            <input type="file" accept=".pdf" className="input--form" onChange={handleFileChange} />
                         </div>
                     </div>
                 </div>

@@ -36,7 +36,6 @@ export default function (props) {
                 } else {
                     localStorage.setItem("username", data.Username);
                     localStorage.setItem("roleName", data.RoleName);
-                    /* LEMBRAR DE ALTERAR PARA A PAGINA CERTA DEPOIS*/
                     window.location.reload();
                 }
             })

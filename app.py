@@ -6,13 +6,17 @@
 # Service contém as funções que são chamadas pelas rotas, e que chamam as funções do DAO,
 # Service realiza algum tratamento prévio, como recuperar elementos do request
 
-from flask import Flask, jsonify, request
-from service import UserService, AreasService, EquipmentsService, CandidateService, ReportService
+import os
+from flask import Flask, jsonify, request, flash, redirect, url_for
+import Utils
+from service import UserService, AreasService, EquipmentsService, CandidateService, ReportService,RescissionSolicitationService, VacationSolicitationService
 from flask_cors import CORS
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 CORS(app)
 
+app.config['UPLOAD_FOLDER'] = './Media/PDF/CPF/'
 
 # Criação das possiveis rotas do código
 @app.route('/api', methods=['GET'])
@@ -72,6 +76,7 @@ def InsertEquipment():
 
 @app.route('/api/insertCandidate', methods=['POST'])
 def InsertCandidate():
+    print("InsertCandidate request received")
     return CandidateService.InsertCandidate(request)
 
 @app.route('/api/getCandidates', methods=['GET'])
@@ -96,3 +101,42 @@ def GetReportByLocation():
 @app.route('/api/insertReport', methods=['POST'])
 def InsertReport():
     return ReportService.InsertReport(request)
+
+#------------ Solicitação de férias ----------------
+
+@app.route('/api/getVacationSolicitations', methods=['GET'])
+def GetVacationSolicitations():
+    print("GetVacationSolicitations request received")
+    return VacationSolicitationService.GetVacationSolicitations()
+
+@app.route('/api/getVacationSolicitationById', methods=['GET'])
+def GetVacationSolicitationById():
+    print("GetVacationSolicitationById request received")
+    return VacationSolicitationService.GetVacationSolicitationById(request)
+
+@app.route('/api/insertVacationSolicitation', methods=['POST'])
+def InsertVacationSolicitation():
+    print("InsertVacationSolicitation request received")
+    return VacationSolicitationService.InsertVacationSolicitation(request)
+
+#------------ Solicitação de recisão ----------------
+
+@app.route('/api/getRescissionSolicitations', methods=['GET'])
+def GetRescissionSolicitations():
+    print("GetRescissionSolicitations request received")
+    return RescissionSolicitationService.GetRescissionSolicitations()
+
+@app.route('/api/getRescissionSolicitationById', methods=['GET'])
+def GetRescissionSolicitationById():
+    print("GetRescissionSolicitationById request received")
+    return RescissionSolicitationService.GetRescissionSolicitationById(request)
+
+@app.route('/api/insertRescissionSolicitation', methods=['POST'])
+def InsertRescissionSolicitation():
+    print("InsertRescissionSolicitation request received")
+    return RescissionSolicitationService.InsertRescissionSolicitation(request)
+#----------- Files ----------------
+@app.route('/api/uploadFile', methods=['POST'])
+def UploadFile():
+    print("UploadFile request received")
+    return Utils.UploadFile(request)

@@ -23,7 +23,7 @@ export default function Usuario() {
                 <Accordion.Item className="accordion-item" key={index} eventKey={index.toString()}>
                     <Accordion.Header className="nome-candidato">{candidate.CandidateName}</Accordion.Header>
                     <Accordion.Body>
-                        <p>CPF: {candidate.Cpf} </p>
+                        <p>CPF: {candidate.candidatepf} </p>
                         <p>Data de Nascimento:{candidate.BirthDate} </p>
                         <p>Gênero: {candidate.Gender}</p>
                         <p>CEP: {candidate.Cep}</p>

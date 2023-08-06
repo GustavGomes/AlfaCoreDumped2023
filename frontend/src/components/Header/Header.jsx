@@ -25,7 +25,6 @@ export default function Header() {
     }
 
     useEffect(() => {
-        // Add padding to the body to account for the Navbar's height
         document.body.style.paddingTop = `${document.querySelector('.navbar').offsetHeight}px`;
         // Verifica se o usuário está logado (se o username e roleName estão definidos)
         setIsLoggedIn(!!username && !!roleName);
@@ -49,7 +48,7 @@ export default function Header() {
                         <Nav className="ms-auto">
                             <Nav.Link as={Link} to="/" className="nav--link">HOME</Nav.Link>
                             <Nav.Link as={Link} to="/candidatos" className="nav--link">TRABALHE CONOSCO</Nav.Link>
-                            <Nav.Link as={Link} to="/ocorrencias" className="nav--link">FAÇA UMA OCORRÊNCIA</Nav.Link>
+                            <Nav.Link as={Link} to="/ocorrencias" className="nav--link">FAÇA UM RELATO</Nav.Link>
                             <Nav.Link as={Link} to="/login" className="nav--link">LOGIN</Nav.Link>
                         </Nav>
                     )}

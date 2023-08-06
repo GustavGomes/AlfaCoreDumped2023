@@ -1,4 +1,6 @@
+# Classe para representar a tabela de candidatos
 class Candidate:
+    # Construtor da classe
     def __init__(self, id, CandidateName, MotherName, FatherName, Gender, CiviState, EducationLevel, Ethnicity, BirthDate,
                  Nacionality, BirthCountry, BirthState, BirthCity, ShoeSize, PantsSize, ShirtSize, TelephoneNumber,
                  SecondTelephoneNumber, Email, Cep, Country, State, City, Neighborhood, ResidencyType, Street, ResidencyNumber, Complement,
@@ -47,6 +49,7 @@ class Candidate:
         self.ArmyFile = ArmyFile
         self.HasFriendFamiliar = HasFriendFamiliar
     
+    # Retorna um dicionário com os dados da classe para facilitar a conversão para JSON
     def _dict_(self) -> dict:
         return {
             'id': self.id,
