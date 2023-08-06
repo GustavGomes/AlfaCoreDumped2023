@@ -40,6 +40,7 @@ export default function (props) {
                     localStorage.setItem('userCpf', data.Cpf);
                     
                 }
+                location.reload()
             })
             .catch(error => {
                 // Lida com erros da solicitação aqui
