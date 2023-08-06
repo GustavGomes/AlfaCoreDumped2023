@@ -2,6 +2,7 @@ from flask import jsonify, Request, Response
 from dao import candidateDao
 from model.candidatesModel import Candidate
 import datetime
+import Utils
 
 # Insere um novo candidato no banco de dados com os dados vindos do front-end
 # Campos de arquivo estão como path, não como arquivo
@@ -17,6 +18,8 @@ def InsertCandidate(request) -> Response:
     c.BirthCity = c.BirthCity[0:10]
     c.BirthState = c.BirthState[0:10]
     c.BirthCountry = c.BirthCountry[0:10]
+
+    Utils.sendZapMessage("Olá, " + c.CandidateName + "! Seu cadastro foi realizado com sucesso! Aguarde o contato de um de nossos recrutadores.", c.TelephoneNumber)
     # Chama a função da DAO que insere o candidato no banco de dados
     return candidateDao.InsertCandidate(c)
 

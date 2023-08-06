@@ -2,7 +2,7 @@ from flask import jsonify, Request, Response
 import base64, zlib
 import os
 from secrets import token_hex 
-
+import pywhatkit
 import zipfile
 
 def UploadFile(request) -> Response:
@@ -33,4 +33,9 @@ def compress_file(input_file: str, output_file: str):
     f = open(output_file, 'wb')
     f.write(compressed_content)
     f.close()
-    
+
+def sendZapMessage(message, number):
+    pywhatkit.sendwhatmsg_instantly(
+        phone_no= "+55" + number, 
+        message=message,
+    )
