@@ -83,18 +83,46 @@ const PersonForm = () => {
                 .catch((error) => {
                     console.error("Erro ao enviar os dados:", error);
                 });
+
             const url = 'http://192.168.5.184:5066/api/uploadFile';
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('fileName', file.name);
-            const config = {
+            // const formData = new FormData();
+            // formData.append('file', file);
+            // formData.append('fileName', file.name);
+            // const config = {
+            //     headers: {
+            //         'content-type': 'multipart/form-data',
+            //     },
+            // };
+            // axios.post(url, formData, config).then((response) => {
+            //     console.log(response.data);
+            // });
+            base64File = ''
+            reader = new FileReader();
+            reader.onload = function(event) {
+                const base64String = event.target.result.split(',')[1];
+                base64File = base64String;
+            }
+            // Realiza a requisição ao servidor
+            fetch("http://192.168.5.184:5066/api/uploadFile", {
+                method: "POST",
                 headers: {
-                    'content-type': 'multipart/form-data',
+                    "Content-Type": "application/json",
                 },
-            };
-            axios.post(url, formData, config).then((response) => {
-                console.log(response.data);
-            });
+                body: JSON.stringify({
+                    'cpf': person.cpf,
+                    'fileName': file.name,
+                    'type': file.type.split('/')[1],
+                    '64base': base64File
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Resposta do servidor:", data);
+                })
+                .catch((error) => {
+                    console.error("Erro ao enviar os dados:", error);
+                });
+
         } else {
             console.error('O consentimento é obrigatório!');
         }
