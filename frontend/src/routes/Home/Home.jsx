@@ -1,12 +1,12 @@
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './home.css'
+import './home.css';
+import Landing from "../../components/Landing/Landing.jsx";
 
 
 function Home() {
   return (
-    <>
-      <p>HOME</p>
-    </>
+      <Landing/>
   )
 }
 

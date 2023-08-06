@@ -25,7 +25,6 @@ export default function Header() {
     }
 
     useEffect(() => {
-        // Add padding to the body to account for the Navbar's height
         document.body.style.paddingTop = `${document.querySelector('.navbar').offsetHeight}px`;
         // Verifica se o usuário está logado (se o username e roleName estão definidos)
         setIsLoggedIn(!!username && !!roleName);
