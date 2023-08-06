@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, useRoutes, Navigate } from 'react-router-dom';
 
 // CONFIGURANDO ROUTER
-import Home from "./routes/Home/Home";
 import CadastroOcorrencias from "./routes/CadastroOcorrencia/CadastroOcorrencia";
 import CadastroCandidatos from "./routes/CadastroCandidatos/CadastroCandidatos.jsx";
 import Login from "./routes/Login/Login";

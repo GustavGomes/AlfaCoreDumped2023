@@ -64,3 +64,6 @@ div.form-control {
     background-color: #f7f7f7 !important;
 }
 
+.form-control {
+    border: none !important;
+}
