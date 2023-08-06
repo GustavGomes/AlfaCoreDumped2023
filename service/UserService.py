@@ -15,14 +15,14 @@ def Login(request: Request) -> str:
     password = request.json['password']
 
     
-    #Realiza o MD5 da senha
-    md5_hash = hashlib.md5()
+    # #Realiza o MD5 da senha
+    # md5_hash = hashlib.md5()
 
-    # Atualizando o hash com a string
-    md5_hash.update(password.encode('utf-8'))
+    # # Atualizando o hash com a string
+    # md5_hash.update(password.encode('utf-8'))
 
-    # Obtendo o hash MD5 em formato hexadecimal
-    password = md5_hash.hexdigest()
+    # # Obtendo o hash MD5 em formato hexadecimal
+    # password = md5_hash.hexdigest()
 
     # Chama a função da DAO que verifica as credenciais do usuário no banco de dados
     user = userDao.Login(username, password)

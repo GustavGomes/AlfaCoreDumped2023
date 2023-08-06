@@ -1,8 +1,8 @@
 # Classe para representar a tabela de solicitação de rescisão
 class RescissionSolicitation:
     # Construtor da classe
-    def __init__(self, id, CreatorId, TargetId, Status, Rank, Reason, Description, CreationDate, StartDate,
-                 EndDate, UserId):
+    def __init__(self, id='', CreatorId='', TargetId='', Status='', Rank='', Reason='', Description='', CreationDate='1970-01-01', StartDate='1970-01-01',
+                 EndDate='1970-01-01', UserId=''):
         
         self.id = id
         self.CreatorId = CreatorId

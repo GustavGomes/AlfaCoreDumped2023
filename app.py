@@ -131,6 +131,10 @@ def InsertVacationSolicitation():
     print("InsertVacationSolicitation request received")
     return VacationSolicitationService.InsertVacationSolicitation(request)
 
+@app.route('/api/getvacations')
+def GetAllVacations():
+    return VacationSolicitationService.GetAllVacations(request)
+
 #------------ Solicitação de recisão ----------------
 
 @app.route('/api/getRescissionSolicitations', methods=['GET'])
@@ -147,6 +151,9 @@ def GetRescissionSolicitationById():
 def InsertRescissionSolicitation():
     print("InsertRescissionSolicitation request received")
     return RescissionSolicitationService.InsertRescissionSolicitation(request)
+@app.route('/api/getRescissions')
+def GetAllRescisions():
+    return RescissionSolicitationService.GetAllRescissions(request)
 #----------- Files ----------------
 @app.route('/api/uploadFile', methods=['POST'])
 def UploadFile():
