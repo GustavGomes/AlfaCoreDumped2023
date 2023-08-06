@@ -11,7 +11,7 @@ from flask import Flask, jsonify, request, flash, redirect, url_for
 import Utils
 from service import UserService, AreasService, EquipmentsService, CandidateService, ReportService,RescissionSolicitationService, VacationSolicitationService
 from flask_cors import CORS
-from werkzeug.utils import secure_filename
+
 
 app = Flask(__name__)
 CORS(app)
