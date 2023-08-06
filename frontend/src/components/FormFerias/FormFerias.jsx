@@ -4,17 +4,15 @@ import "./formFerias.css";
 function FormFerias() {
     // ---- Ferias ----
     const [vacation, setVacation] = useState({
-        id: "",
         username: "",
-        creator_id: 0,
-        target_id: 0,
+        creator_id: "",
         status: "",
         vacation_start: Date,
         vacation_end: Date,
         description: "",
         creation_date: "",
         start_date: "",
-        user_id: "",
+        end_date: ""
     });
     // HANDLE FORM + CONEXAO API-------
     const handleChange = (e) => {
@@ -28,39 +26,34 @@ function FormFerias() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        vacation.creation_date = new Date();
+        vacation.status = "Pendente";
+        vacation.creator_id = localStorage.getItem("userCpf");
+        vacation.vacation_start = vacation.start_date;
+        vacation.vacation_end = vacation.end_date;
+        console.log(vacation)
+        // Cria uma cópia da ocorrência atual para enviar para a API
+        fetch("http://192.168.5.184:5066/api/insertVacationSolicitation", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(vacation),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Resposta do servidor:", data);
+            })
+            .catch((error) => {
+                console.error("Erro ao enviar os dados:", error);
+            });
         // Cria um objeto JSON com os dados do formulário
-        const formData = {
-
-        };
+        const formData = {        };
 
         // Imprime o JSON no console para fins de teste
         console.log(formData);
 
         // setar dados: creator_id, target_id -------------
-
-        // conexao a api
-        fetch("", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                // Manipula a resposta da API aqui 
-                console.log(data);
-                // Limpa os campos do formulário após o envio
-                setVacation({});
-            })
-            .catch(error => {
-                // Lida com erros da solicitação aqui
-                console.error('Erro:', error);
-                // Define a mensagem de erro genérica para problemas de conexão com a API
-                setErrorMessage("Ocorreu um erro ao se conectar à API. Por favor, tente novamente mais tarde.");
-            });
-
     };
 
 

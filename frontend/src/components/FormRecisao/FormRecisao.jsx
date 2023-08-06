@@ -4,7 +4,6 @@ import "./formRecisao.css";
 function FormRecisao() {
     // ---- Recisao ----
     const [recission, setRecission] = useState({
-        id: "",
         username: "",
         creator_id: 0,
         target_id: 0,
@@ -20,8 +19,7 @@ function FormRecisao() {
     });
     // HANDLE FORM + CONEXAO API-------
     const handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
+        const { name, value } = e.target;
 
         setRecission({ ...recission, [name]: value });
     };
@@ -42,7 +40,7 @@ function FormRecisao() {
         // setar dados: creator_id, target_id -------------
 
         // conexao a api
-        fetch("", {
+        fetch("http://192.168.5.184:5066/api/insertRescissionSolicitation", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -74,12 +72,14 @@ function FormRecisao() {
                 </div>
             </div>
 
+            
+
             <form className="form">
                 <div className="row">
                     <div className="col-12">
                         <p className="form--text">Qual o motivo da rescisão?:</p>
                         <label>
-                            <select name="" value={recission.reason} onChange={handleChange}>
+                            <select name="reason" value={recission.reason} onChange={handleChange}>
                                 <option value="" disabled>
                                     Escolha
                                 </option>
