@@ -72,10 +72,21 @@ function FormRecisao() {
                 </div>
             </div>
 
-            
+
 
             <form className="form">
-                
+            <div className="row">
+                    <div className="col-12">
+                    <label htmlFor="">Nome de Usuario: </label>
+                            <input
+                                type="text"
+                                name="username"
+                                value={recission.username}
+                                onChange={handleChange}
+                                className="input--form"
+                            />
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col-12">
                         <p className="form--text">Qual o motivo da rescisão?:</p>
