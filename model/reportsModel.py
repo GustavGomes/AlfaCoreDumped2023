@@ -1,7 +1,7 @@
 # Classe para representar a tabela de relatórios 
 class Reports:
     # Construtor da classe
-    def __init__(self, Id='', ReporterName='', CostCenter='', Description='', OperationField='', CreatedAt='', Location='', images=[]):
+    def __init__(self, Id='', ReporterName='', CostCenter='', Description='', OperationField='', CreatedAt='1970-01-01', Location='', images=[]):
         self.Id = Id
         self.ReporterName = ReporterName
         self.CostCenter = CostCenter
@@ -10,6 +10,8 @@ class Reports:
         self.CreatedAt = CreatedAt
         self.Location = Location
         self.images = images
+        if(len(images) == 0):
+            self.images = ['', '', '']
 
     # Retorna um dicionário com os dados da classe para facilitar a conversão para JSON
     def __dict__(self) -> dict:

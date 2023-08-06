@@ -61,11 +61,11 @@ def InsertRescissionSolicitation(r: rescissionSolicitation) -> Response:
     cursor = connection.cursor()
     # Query a ser executada
     query = '''
-        INSERT INTO rescissionsolicitation (id, creator_id, target_id, status,`rank`, reason, description, creation_date, start_date, end_date, user_id)
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        INSERT INTO rescissionsolicitation (creator_id, target_id, status,`rank`, reason, description, creation_date, start_date, end_date, user_id)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         '''
     # Dados a serem passados para a query
-    data = (r.id, r.CreatorId, r.TargetId, r.Status, r.Rank, r.Reason, r.Description, r.CreationDate, r.StartDate, r.EndDate, r.UserId)
+    data = (r.CreatorId, r.TargetId, r.Status, r.Rank, r.Reason, r.Description, r.CreationDate, r.StartDate, r.EndDate, r.UserId)
     # Executa a query mesclando-a com os dados
     cursor.execute(query, data)
     # Salva as alterações no banco de dados

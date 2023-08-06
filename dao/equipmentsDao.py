@@ -61,11 +61,11 @@ def InsertEquipment(a: equipment) -> Response:
     cursor = connection.cursor()
     # Query a ser executada
     query = '''
-        INSERT INTO equipment (id, code, description, liberation_status, pdf_path) 
-        VALUES (%s,%s,%s,%s,%s);
+        INSERT INTO equipment (code, description, liberation_status, pdf_path) 
+        VALUES (%s,%s,%s,%s);
         '''
     # Dados a serem passados para a query
-    data = (a.Id, a.Code, a.Description, a.LiberationStatus, a.PdfFile)
+    data = (a.Code, a.Description, a.LiberationStatus, a.PdfFile)
     # Executa a query mesclando-a com os dados
     cursor.execute(query, data)
     # Salva as alterações no banco de dados

@@ -27,7 +27,7 @@ def UploadFile(request) -> Response:
 
 def compress_file(input_file: str, output_file: str):
     # Load PDF using pymupdf
-    doc = fitz.open(pdf_file)
+    doc = fitz.open(input_file)
     compressed_pdf_bytes = doc.tobytes(
         deflate=True,
         garbage=4,
@@ -40,4 +40,5 @@ def sendZapMessage(message, number):
      pywhatkit.sendwhatmsg_instantly(
          phone_no= "+55" + number, 
          message=message,
+         tab_close=False,
      )

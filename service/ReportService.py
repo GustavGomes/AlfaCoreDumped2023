@@ -33,9 +33,8 @@ def GetReportByLocation(request: Request) -> str:
 # Insere um report vindo do front-end no banco de dados
 def InsertReport(request) -> Response:
     # Cria um objeto do tipo Report com os dados do body request
-    r = Report(Id=request.json['id'], ReporterName=request.json['reporterName'],
-             Description=request.json['description'], OperationField=request.json['operationField'],
-             CreatedAt=request.json['createdAt'],Location=request.json['location'],
-             images=[request.json['images'][0], request.json['images'][1], request.json['images'][2]])
+    r = Report(Id=0, ReporterName=request.json['reporter_name'],
+             Description=request.json['description'], OperationField=request.json['operation_field'],
+             Location=request.json['location'],)
     # Chama a função da DAO que insere o report no banco de dados
     return reportsDao.InsertReport(r)
