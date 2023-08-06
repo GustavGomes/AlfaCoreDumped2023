@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
+import { Nav, Dropdown } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import "./header.css"
 import logo from "../../images/logoWhite.png"
 import { Link } from "react-router-dom"
-import { AuthContext }  from "../AuthContext"
+import { AuthContext } from "../AuthContext"
 
 export default function Header() {
 
-    const { isLoggedIn, logout} = useContext (AuthContext)
-    
+    const { isLoggedIn, logout } = useContext(AuthContext)
+
     return (
         <Navbar expand="lg" className="navbar fixed-top navbar-expand-lg navbar-light bg-light" >
             <Container>
@@ -20,8 +20,16 @@ export default function Header() {
                     {isLoggedIn ? (
                         <Nav className="ms-auto">
                             <Nav.Link as={Link} to="/usuariosCadastrados" className="nav--link">USUÁRIOS CADASTRADOS</Nav.Link>
-                            <Nav.Link as={Link} to="/relatorios" className="nav--link"> VER RELATÓRIOS</Nav.Link>      
-                            <Nav.Link as={Link} to="/cadastroSolicitacao" className="nav--link">REALIZAR SOLICITAÇÃO</Nav.Link>
+                            <Nav.Link as={Link} to="/relatorios" className="nav--link">VER RELATÓRIOS</Nav.Link>
+                            <Dropdown>
+                                <Dropdown.Toggle as={Nav.Link} className="nav--link">
+                                    REALIZAR SOLICITAÇÃO
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <Dropdown.Item as={Link} to="/solicitacaoFerias">Férias</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/solicitacaor\Recisao">Recisão</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                             <Nav.Link as={Link} to="/cadastroAreaEquip" className="nav--link">CADASTRO DE ÁREA/EQUIPAMENTO</Nav.Link>
                             <Nav.Link as={Link} to="/login" className="nav--link btn--sair" onClick={logout}>SAIR</Nav.Link>
                         </Nav>

@@ -4,11 +4,13 @@ import "./formOcorrencia.css";
 function FormOcorrencia() {
     // ---- OCORRENCIA ----
     const [occurrence, setOccurrence] = useState({
+        id: "", 
         reporter_name: "",
         cost_center: "",
         description: "",
         operation_field: "",
         location: "",
+        created_at: ""
     });
     const [occurrences, setOccurrences] = useState([]);
     
@@ -35,6 +37,7 @@ function FormOcorrencia() {
         ) {
             // Cria uma cópia da ocorrência atual para enviar para a API
             const occurrenceToSend = { ...occurrence };
+            console.log(JSON.stringify(occurrenceToSend))
 
             // Se a geolocalização estiver disponível, adiciona-a à ocorrência
             getLocation()
@@ -115,6 +118,7 @@ function FormOcorrencia() {
                                 value={occurrence.reporter_name}
                                 onChange={handleChange}
                                 className="input--form"
+                                required
                             />
                         </div>
                     </div>
@@ -129,6 +133,7 @@ function FormOcorrencia() {
                                 value={occurrence.operation_field}
                                 onChange={handleChange}
                                 className="input--form"
+                                required
                             />
                         </div>
                     </div>
@@ -141,6 +146,7 @@ function FormOcorrencia() {
                                 value={occurrence.cost_center}
                                 onChange={handleChange}
                                 className="input--form"
+                                required
                             />
                         </div>
                     </div>
@@ -153,6 +159,7 @@ function FormOcorrencia() {
                             value={occurrence.description}
                             onChange={handleChange}
                             className="input--form"
+                            required
                         />
                     </div>
                 </div>
@@ -172,28 +179,6 @@ function FormOcorrencia() {
                     </button>
                 </div>
             </form>
-
-            <div className="items">
-                {occurrences.map((item) => {
-                    const {
-                        id,
-                        reporter_name,
-                        cost_center,
-                        description,
-                        operation_field,
-                        location
-                    } = item;
-                    return (
-                        <div className="item" key={id}>
-                            <h4>{reporter_name}</h4>
-                            <p>Cost Center: {cost_center}</p>
-                            <p>Description: {description}</p>
-                            <p>Operation Field: {operation_field}</p>
-                            <p>Location: {location}</p>
-                        </div>
-                    );
-                })}
-            </div>
         </div>
     );
 }
