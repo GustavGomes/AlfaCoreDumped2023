@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Accordion from "react-bootstrap/Accordion";
-import "./usuario.css"
+import "../Usuario/usuario.css"
 
 export default function VisualizacaoOcorrencia() {
     const [occurrences, setOcurrences] = useState([]);
@@ -18,14 +18,16 @@ export default function VisualizacaoOcorrencia() {
     }, []);
 
     return (
+        
         <Accordion >
             {occurrences.map((ocurrence, index) => (
                 <Accordion.Item className="accordion-item" key={index} eventKey={index.toString()}>
                     <Accordion.Header 
-                    className="reporter_name">{ocurrence.Reporter_Name}
+                    className="cost_center">Relatório {ocurrence.Id}
                     </Accordion.Header>
                     <Accordion.Body>
-                        <p>Centro de Custo: {ocurrence.Cost_Center} </p>
+                        <p>Nome de quem reportou: {ocurrence.ReporterName} </p>
+                        <p>Centro de Custo: {ocurrence.CostCenter} </p>
                         <p>Descrição:{ocurrence.Description} </p>
                         <p>Área de Operação: {ocurrence.Operation_Field}</p>
                         <p>Localização: {ocurrence.Location} </p>

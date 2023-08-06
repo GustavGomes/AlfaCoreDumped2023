@@ -24,9 +24,9 @@ export default function Header() {
                                     VISUALIZAR
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item as={Link} to="/ocorrencias">Ocorrências</Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="/usuariosCadastrados">Candidatos</Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="/solicitacoes">Solicitações</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/verOcorrencias">Ocorrências</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/verUsuariosCadastrados">Candidatos</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/verSolicitacoes">Solicitações</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                             <Dropdown>
