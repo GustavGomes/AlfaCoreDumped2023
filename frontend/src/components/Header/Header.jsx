@@ -20,6 +20,7 @@ export default function Header() {
         localStorage.removeItem("username");
         localStorage.removeItem("roleName");
         // Atualiza o estado de isLoggedIn para indicar que o usuário não está mais logado
+        location.reload()
         setIsLoggedIn(false);
     }
 
@@ -48,7 +49,7 @@ export default function Header() {
                         <Nav className="ms-auto">
                             <Nav.Link as={Link} to="/" className="nav--link">HOME</Nav.Link>
                             <Nav.Link as={Link} to="/candidatos" className="nav--link">TRABALHE CONOSCO</Nav.Link>
-                            <Nav.Link as={Link} to="/ocorrencias" className="nav--link">FAÇA UMA OCORRÊNCIA</Nav.Link>
+                            <Nav.Link as={Link} to="/ocorrencias" className="nav--link">FAÇA UM RELATO</Nav.Link>
                             <Nav.Link as={Link} to="/login" className="nav--link">LOGIN</Nav.Link>
                         </Nav>
                     )}
