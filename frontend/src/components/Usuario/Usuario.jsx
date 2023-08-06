@@ -6,13 +6,15 @@ export default function Usuario() {
     const [candidates, setCandidates] = useState([]);
 
     function ApproveCandidate(cpf) {
-        fetch("http://192.168.5.184:5066/api/getCandidates", {
+        console.log(cpf)
+        fetch("http://192.168.5.184:5066/api/approveCandidate", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                "cpf":candidates
+
+                "cpf":cpf
             }),
         })
 
@@ -45,7 +47,7 @@ export default function Usuario() {
                         <p>Email: {candidate.Email} </p>
                         <p className="ultimo">Telefone: {candidate.TelephoneNumber} </p>
                         <div className="d-flex justify-content-end">
-                            <button onClick={() => {ApproveCandidate(candidate.cpf)}} className="btn accordion">aprovar</button>
+                            <button onClick={() => {ApproveCandidate(candidate.Cpf)}} className="btn accordion">aprovar</button>
                         </div>
                     </Accordion.Body>
                 </Accordion.Item>
