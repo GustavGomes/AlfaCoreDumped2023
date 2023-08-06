@@ -2,6 +2,15 @@ from flask import jsonify, Request, Response
 from dao import vacationSolicitationDao
 from model.vacationSolicitationModel import VacationSolicitation
 
+# Recupera todos os reports do banco de dados
+def GetAllVacations() -> Response:
+    # Solicita à dao todos os reports
+    reports = vacationSolicitationDao.GetAllVacations()
+    # Converte cada resultado para um dicionário, para facilitar a conversão para JSON
+    reports_list = [r.__dict__() for r in reports]
+    # Retorna a lista de reports em formato JSON
+    return jsonify(reports_list)
+
 # Insere no banco uma solicitação de férias pela DAO
 def InsertVacationSolicitation(request) -> Response:
     # Cria um objeto do tipo VacationSolicitation com os dados do request
