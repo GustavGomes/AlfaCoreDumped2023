@@ -35,7 +35,7 @@ export default function Usuario() {
             {candidates.map((candidate, index) => (
                 <Accordion.Item className="accordion-item" key={index} eventKey={index.toString()}>
                     <Accordion.Header 
-                    className="nome-candidato">{candidate.CandidateName}
+                    className="nome-candidato header-acc">{candidate.CandidateName}
                     </Accordion.Header>
                     <Accordion.Body>
                         <p>CPF: {candidate.Cpf} </p>

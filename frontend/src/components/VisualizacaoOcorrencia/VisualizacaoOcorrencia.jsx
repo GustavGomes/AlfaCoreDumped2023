@@ -23,7 +23,7 @@ export default function VisualizacaoOcorrencia() {
             {occurrences.map((ocurrence, index) => (
                 <Accordion.Item className="accordion-item" key={index} eventKey={index.toString()}>
                     <Accordion.Header 
-                    className="cost_center">Relatório {ocurrence.Id}
+                    className="cost_center header-acc">Relatório {ocurrence.Id}
                     </Accordion.Header>
                     <Accordion.Body>
                         <p>Nome de quem reportou: {ocurrence.ReporterName} </p>
