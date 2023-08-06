@@ -6,7 +6,8 @@ import { createBrowserRouter, RouterProvider, useRoutes, Navigate } from 'react-
 import CadastroOcorrencias from "./routes/CadastroOcorrencia/CadastroOcorrencia";
 import CadastroCandidatos from "./routes/CadastroCandidatos/CadastroCandidatos.jsx";
 import Login from "./routes/Login/Login";
-import CadastroSolicitacao from './routes/CadastroSolicitacao/CadastroSolicitacao';
+import CadastroFerias from './routes/CadastroFerias/CadastroFerias'
+import CadastroRescisao from './routes/CadastroRescisao/CadastroRescisao';;
 import CadastroAreaEquip from './routes/CadastroAreaEquip/CadastroAreaEquip';
 import VerUsuariosCadastrados from './routes/VerUsuariosCadastrados/VerUsuariosCadastrados';
 import VerRelatorios from './routes/VerRelatorios/VerRelatorios';
@@ -40,11 +41,15 @@ const routes = [
       },
       {
         path: "/login", 
-        element: isAuthenticated() ? <Navigate to="/cadastroSolicitacao" /> : <Login /> 
+        element: isAuthenticated() ? <Navigate to="/cadastroFerias" /> : <Login /> 
       },
       {
-        path: "/cadastroSolicitacao",
-        element: isAuthenticated() ? <CadastroSolicitacao /> : <Navigate to="/login" />
+        path: "/cadastroFerias",
+        element: isAuthenticated() ? <CadastroFerias /> : <Navigate to="/login" />
+      },
+      {
+        path: "/cadastroRescisao",
+        element: isAuthenticated() ? <CadastroRescisao /> : <Navigate to="/login" />
       },
       {
         path: "/cadastroAreaEquip",

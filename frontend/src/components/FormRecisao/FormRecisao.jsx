@@ -124,6 +124,11 @@ function FormRecisao() {
                         </label>
                     </div>
                 </div>
+                <div className="text-center">
+                    <button className='btn' type="submit" onClick={handleSubmit} >
+                        Enviar Solicitação
+                    </button>
+                </div>
             </form>
         </div>
     );

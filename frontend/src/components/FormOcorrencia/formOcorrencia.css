@@ -67,3 +67,8 @@ div.form-control {
 .form-control {
     border: none !important;
 }
+
+
+h1 {
+    margin-bottom: 20px;
+}

@@ -1,3 +1,11 @@
 .accordion {
     margin-top: 30px;
 }
+
+.btn {
+    margin-top: 0px !important;
+}
+
+.ultimo {
+    margin-bottom: 0px;
+}

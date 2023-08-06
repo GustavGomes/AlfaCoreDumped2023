@@ -20,14 +20,14 @@ export default function Header() {
                     {isLoggedIn ? (
                         <Nav className="ms-auto">
                             <Nav.Link as={Link} to="/usuariosCadastrados" className="nav--link">USUÁRIOS CADASTRADOS</Nav.Link>
-                            <Nav.Link as={Link} to="/relatorios" className="nav--link">VER RELATÓRIOS</Nav.Link>
+                            <Nav.Link as={Link} to="/relatorios" className="nav--link">VER OCORRÊNCIAS</Nav.Link>
                             <Dropdown>
                                 <Dropdown.Toggle as={Nav.Link} className="nav--link">
                                     REALIZAR SOLICITAÇÃO
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <Dropdown.Item as={Link} to="/solicitacaoFerias">Férias</Dropdown.Item>
-                                    <Dropdown.Item as={Link} to="/solicitacaor\Recisao">Recisão</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/cadastroFerias">Férias</Dropdown.Item>
+                                    <Dropdown.Item as={Link} to="/cadastroRescisao">Recisão</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                             <Nav.Link as={Link} to="/cadastroAreaEquip" className="nav--link">CADASTRO DE ÁREA/EQUIPAMENTO</Nav.Link>

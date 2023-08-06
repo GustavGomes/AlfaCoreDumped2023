@@ -1,9 +1,9 @@
 import React from "react";
 import FormFerias from "../../components/FormFerias/FormFerias"
-import FormRecisao from "../../components/Form Recisao/FormRecisao"
+import FormRecisao from "../../components/FormRecisao/FormRecisao"
 import Accordion from 'react-bootstrap/Accordion';
 
-export default function CadastroSolicitacao() {
+export default function () {
     return (
         <div>
             <h1 className="text-center">Realizar uma Solicitação</h1>

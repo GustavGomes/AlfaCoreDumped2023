@@ -59,6 +59,7 @@ function FormOcorrencia() {
                         .then((response) => response.json())
                         .then((data) => {
                             console.log("Resposta do servidor:", data);
+                            
                         })
                         .catch((error) => {
                             console.error("Erro ao enviar os dados:", error);
