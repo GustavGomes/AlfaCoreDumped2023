@@ -3,7 +3,7 @@ import Solicitacoes from "../../components/VisualizacaoSolicitacoes/Visualizacao
 export default function VerSolicitacoes() {
     return(
         <>
-        <h1>Ocorrências Cadastradas</h1>
+        <h1 className="text-center">Solicitações Cadastradas</h1>
         <Solicitacoes />
         </>
         

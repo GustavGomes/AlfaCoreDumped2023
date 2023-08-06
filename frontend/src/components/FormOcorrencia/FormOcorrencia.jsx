@@ -64,7 +64,6 @@ function FormOcorrencia() {
                         .catch((error) => {
                             console.error("Erro ao enviar os dados:", error);
                         });
-
                     // Adiciona a ocorrência enviada à lista de ocorrências
                     setOccurrences([...occurrences, occurrenceToSend]);
                     // Reseta o formulário
