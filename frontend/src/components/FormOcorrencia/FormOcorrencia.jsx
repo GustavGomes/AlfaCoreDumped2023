@@ -176,7 +176,7 @@ function FormOcorrencia() {
 
                 <div className="text-center">
                     <button className='btn' type="submit" onClick={handleSubmit} >
-                        Enviar Relato
+                        Enviar Ocorrência
                     </button>
                 </div>
             </form>

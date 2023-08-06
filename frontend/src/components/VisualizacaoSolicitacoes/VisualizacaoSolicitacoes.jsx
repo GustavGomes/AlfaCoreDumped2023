@@ -1,24 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Accordion from "react-bootstrap/Accordion";
-import "./usuario.css"
+import "../Usuario/usuario.css"
 
-export default function Usuario() {
+export default function Solicitacao() {
     const [candidates, setCandidates] = useState([]);
-
-    function ApproveCandidate(cpf) {
-        console.log(cpf)
-        fetch("http://192.168.5.184:5066/api/approveCandidate", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-
-                "cpf":cpf
-            }),
-        })
-
-    }
 
     useEffect(() => {
         fetch("http://192.168.5.184:5066/api/getCandidates")
@@ -47,7 +32,7 @@ export default function Usuario() {
                         <p>Email: {candidate.Email} </p>
                         <p className="ultimo">Telefone: {candidate.TelephoneNumber} </p>
                         <div className="d-flex justify-content-end">
-                            <button onClick={() => {ApproveCandidate(candidate.Cpf)}} className="btn accordion">aprovar</button>
+                            <button className="btn accordion">aprovar</button>
                         </div>
                     </Accordion.Body>
                 </Accordion.Item>
