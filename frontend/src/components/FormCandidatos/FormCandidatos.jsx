@@ -1,8 +1,10 @@
+
 import React, { useState } from "react";
 import "./formCandidatos.css"
 import axios from 'axios';
 import { FormCheck } from "react-bootstrap";
 const PersonForm = () => {
+    // ------------ PERSON  ----------------
     const [person, setPerson] = useState({
         name: "",
         mother_name: "",
@@ -46,7 +48,7 @@ const PersonForm = () => {
     });
 
 
-
+    // ------------ HANDLE FORM  ----------------
     const handleChange = (e) => {
         const { name, value } = e.target;
         setPerson((prevPerson) => ({ ...prevPerson, [name]: value }));
@@ -181,6 +183,9 @@ const PersonForm = () => {
                             <p className="form--text">Sexo:</p>
                             <label>
                                 <select name="genre" value={person.genre} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="homem">Homem</option>
                                     <option value="mulher">Mulher</option>
                                     <option value="ND">prefiro não responder</option>
@@ -192,6 +197,9 @@ const PersonForm = () => {
                             <p className="form--text">Estado Civil:</p>
                             <label>
                                 <select name="civil_state" value={person.civil_state} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="solteiro">Solteiro</option>
                                     <option value="casado">Casado</option>
                                     <option value="separado">Separado</option>
@@ -205,6 +213,9 @@ const PersonForm = () => {
                             <p className="form--text">Grau:</p>
                             <label>
                                 <select name="education_level" value={person.education_level} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="fundamental">Fundamental</option>
                                     <option value="medio">Medio</option>
                                     <option value="superior">Superior</option>
@@ -216,6 +227,9 @@ const PersonForm = () => {
                             <p className="form--text">Raça/Cor:</p>
                             <label>
                                 <select name="ethnicity" value={person.ethnicity} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="branca">Branca</option>
                                     <option value="preta">Preta</option>
                                     <option value="parda">Parda</option>
@@ -445,6 +459,9 @@ const PersonForm = () => {
                             <p className="form--text">Tipo de Logradouro:</p>
                             <label>
                                 <select name="ethnicity" value={person.residency_type} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="privado">Privado</option>
                                     <option value="publico">Público</option>
                                 </select>
@@ -626,6 +643,9 @@ const PersonForm = () => {
                             <p className="form--text">Alojado:</p>
                             <label>
                                 <select name="lodged" value={person.lodged} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="sim">Sim</option>
                                     <option value="não">Não</option>
                                 </select>
@@ -636,6 +656,9 @@ const PersonForm = () => {
                             <p className="form--text">PCD:</p>
                             <label>
                                 <select name="pcd" value={person.pcd} onChange={handleChange}>
+                                    <option value="" disabled>
+                                        Escolher
+                                    </option>
                                     <option value="sim">Sim</option>
                                     <option value="não">Não</option>
                                     <option value="ND">prefiro não responder</option>
