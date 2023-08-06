@@ -18,7 +18,7 @@ export default function Usuario() {
     }, []);
 
     return (
-        <Accordion defaultActiveKey="0">
+        <Accordion >
             {candidates.map((candidate, index) => (
                 <Accordion.Item className="accordion-item" key={index} eventKey={index.toString()}>
                     <Accordion.Header className="nome-candidato">{candidate.CandidateName}</Accordion.Header>

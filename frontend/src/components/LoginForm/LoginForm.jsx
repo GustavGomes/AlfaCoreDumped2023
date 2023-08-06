@@ -19,7 +19,7 @@ export default function (props) {
         // Imprime o JSON no console para fins de teste
         console.log(formData);
 
-        fetch("http://192.168.5.184:5000/api/login", {
+        fetch("http://192.168.5.184:5066/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -35,6 +35,7 @@ export default function (props) {
                     
                 } else {
                     localStorage.setItem("username", data.Username);
+                    localStorage.setItem("roleName", data.RoleName);
                     localStorage.setItem("roleName", data.RoleName);
                     window.location.reload();
                 }
